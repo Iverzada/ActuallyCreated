@@ -1,0 +1,35 @@
+package dev.actuallycreated.content.kinetics;
+
+import com.simibubi.create.AllPartialModels;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
+
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SuperByteBuffer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.world.level.block.state.BlockState;
+
+/**
+ * Renderer for the example kinetic blocks. The base KineticBlockEntityRenderer spins
+ * whatever getRenderedBlockState returns around the rotation axis; by default that is the
+ * block's own model, which a solid casing hides. Returning Create's shaft state instead
+ * makes the rotating part a shaft that pokes out of the (inset) casing model, so the
+ * rotation is visible — the same trick Create uses for its encased components. One generic
+ * renderer serves both the consumer and the generator.
+ */
+public class ActuallyCreatedShaftRenderer<T extends KineticBlockEntity> extends KineticBlockEntityRenderer<T> {
+
+    public ActuallyCreatedShaftRenderer(BlockEntityRendererProvider.Context context) {
+        super(context);
+    }
+
+    @Override
+    protected BlockState getRenderedBlockState(T be) {
+        return shaft(getRotationAxisOf(be));
+    }
+
+    @Override
+    protected SuperByteBuffer getRotatedModel(T be, BlockState state) {
+        return CachedBuffers.partial(AllPartialModels.SHAFT, state);
+    }
+}

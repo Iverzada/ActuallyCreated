@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.actuallycreated.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "actuallycreated.refmap.json",
+  "client": [
+    "PonderSceneAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

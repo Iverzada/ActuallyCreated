@@ -1,0 +1,13 @@
+{
+  "type": "create:haunting",
+  "ingredients": [
+    {
+      "item": "actuallycreated:actuallycreated_item"
+    }
+  ],
+  "results": [
+    {
+      "id": "actuallycreated:actuallycreated_result"
+    }
+  ]
+}
