@@ -8,8 +8,10 @@
   "actuallycreated.ponder.desk_bell_intro.text_1": "This is the desk bell.",
   "actuallycreated.ponder.desk_bell_intro.text_2": "The desk bell will produce a redstone signal when pressed.",
   "actuallycreated.ponder.desk_bell_intro.text_3": "The bell can also be rang using a deployer",
+  "actuallycreated.recipe.reconstructing": "Reconstructing",
   "block.actuallycreated.actuallycreated_generator_block": "Actuallycreated Generator Block",
   "block.actuallycreated.actuallycreated_kinetic_block": "Actuallycreated Kinetic Block",
+  "block.actuallycreated.kinetic_atomic_reconstructor": "Kinetic Atomic Reconstructor",
   "display_source.actuallycreated.actuallycreated_source": "Kinetic Speed",
   "gui.actuallycreated.actuallycreated_generator.generating": "Generating rotation",
   "gui.actuallycreated.actuallycreated_kinetic.consuming": "Drawing stress",
@@ -22,5 +24,6 @@
   "item.actuallycreated.actuallycreated_result": "Actuallycreated Result",
   "item.actuallycreated.incomplete_example": "Incomplete Example",
   "itemGroup.actuallycreated": "Actually Created",
-  "itemGroup.actuallycreated.main_tab": "Main Tab"
+  "itemGroup.actuallycreated.main_tab": "Main Tab",
+  "recipe.actuallycreated.assembly.reconstructing": "Reconstructing"
 }

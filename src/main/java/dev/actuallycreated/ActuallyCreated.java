@@ -3,6 +3,10 @@ package dev.actuallycreated;
 import java.util.concurrent.CompletableFuture;
 
 import dev.actuallycreated.content.ponder.ActuallyCreatedPonderPlugin;
+import dev.actuallycreated.registry.ACBlocks;
+import dev.actuallycreated.registry.ACBlockEntities;
+import dev.actuallycreated.registry.ACRecipeTypes;
+import dev.actuallycreated.registry.ACRecipeSerializers;
 import dev.actuallycreated.datagen.ActuallyCreatedCompactingRecipeGen;
 import dev.actuallycreated.datagen.ActuallyCreatedCrushingRecipeGen;
 import dev.actuallycreated.datagen.ActuallyCreatedCuttingRecipeGen;
@@ -57,6 +61,10 @@ public class ActuallyCreated {
         AllDisplaySources.register();
         AllBlocks.register();
         AllBlockEntityTypes.register();
+        ACBlocks.register();
+        ACBlockEntities.register();
+        ACRecipeTypes.register();
+        ACRecipeSerializers.register();
 
         modBus.addListener(this::onCommonSetup);
         modBus.addListener(this::onClientSetup);

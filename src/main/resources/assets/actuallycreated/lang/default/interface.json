@@ -6,5 +6,7 @@
 	"gui.actuallycreated.rpm": "%s RPM",
 	"gui.actuallycreated.su": "%s SU",
 
-	"display_source.actuallycreated.actuallycreated_source": "Kinetic Speed"
+	"display_source.actuallycreated.actuallycreated_source": "Kinetic Speed",
+	"recipe.actuallycreated.assembly.reconstructing": "Reconstructing",
+	"actuallycreated.recipe.reconstructing": "Reconstructing"
 }

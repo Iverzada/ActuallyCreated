@@ -151,6 +151,32 @@ Actually Additions 1.3.26 loads PatchouliProvider and Curios during its data eve
 even when generating only this addon's resources. The development runtime includes
 both dependencies, matching the [Actually Additions build configuration](https://github.com/Ellpeck/ActuallyAdditions/blob/main/build.gradle).
 
+### Kinetic Atomic Reconstructor (first implementation)
+
+Place the block with its front facing the item path and connect Create rotation to its
+rear face. It consumes 16 SU per RPM and fires only while rotating. Cooldown is
+`ceil(2560 / abs(RPM))` ticks, with a minimum of one tick. Each shot selects one
+valid dropped item stack in front, up to the Encased Fan's configured range, and
+performs up to four recipe operations. A Sequenced Assembly step performs one
+operation and lets Create advance its transitional item.
+
+Datapacks can add `actuallycreated:reconstructing` recipes using Create's processing
+format: `ingredients` is a list with one item ingredient and `results` is a list
+with one output object using `id` (and optional `count`). The included
+`coal_to_diamond.json` is a small demonstration recipe. When JEI is installed,
+the optional `actuallycreated:reconstructing` category shows these recipes and
+uses the Kinetic Atomic Reconstructor as its catalyst.
+
+TODO: handle transported items on belts and depots through Create's
+`BeltProcessingBehaviour`; implement the `NativeReconstructionAdapter` against
+Actually Additions' laser recipes; add final visuals and a dedicated JEI assembly
+animation. The current model uses vanilla polished andesite as a placeholder.
+
+`./gradlew runGameTestServer` checks that the datapack recipe and Sequenced
+Assembly step decode, and verifies rear-only shaft placement and reference
+cooldowns. The test uses the project's existing desk bell structure as a small
+test template.
+
 ## Where to start?
 
 1. Go into your ActuallyCreated.java class to get a quick overview over what is defined and where exactly.

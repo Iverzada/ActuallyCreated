@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "actuallycreated:block/kinetic_atomic_reconstructor",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "actuallycreated:block/kinetic_atomic_reconstructor"
+    },
+    "facing=south": {
+      "model": "actuallycreated:block/kinetic_atomic_reconstructor",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "actuallycreated:block/kinetic_atomic_reconstructor",
+      "y": 270
+    }
+  }
+}

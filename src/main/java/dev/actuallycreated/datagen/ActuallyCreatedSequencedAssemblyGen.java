@@ -8,6 +8,7 @@ import com.simibubi.create.api.data.recipe.BaseRecipeProvider.GeneratedRecipe;
 import com.simibubi.create.api.data.recipe.SequencedAssemblyRecipeGen;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
+import dev.actuallycreated.recipe.reconstructing.ReconstructingRecipe;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -26,7 +27,8 @@ public class ActuallyCreatedSequencedAssemblyGen extends SequencedAssemblyRecipe
             .addOutput(AllItems.EXAMPLE_RESULT.get(), 1f)
             .loops(2)
             .addStep(DeployerApplicationRecipe::new, rb -> rb.require(Items.COPPER_INGOT))
-            .addStep(PressingRecipe::new, rb -> rb));
+            .addStep(PressingRecipe::new, rb -> rb)
+            .addStep(ReconstructingRecipe::new, rb -> rb));
 
     public ActuallyCreatedSequencedAssemblyGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, ActuallyCreated.ID);

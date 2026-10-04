@@ -1,0 +1,9 @@
+{
+  "type": "actuallycreated:reconstructing",
+  "ingredients": [
+    { "item": "minecraft:coal" }
+  ],
+  "results": [
+    { "id": "minecraft:diamond" }
+  ]
+}

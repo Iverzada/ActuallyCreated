@@ -38,6 +38,19 @@
           "id": "actuallycreated:incomplete_example"
         }
       ]
+    },
+    {
+      "type": "actuallycreated:reconstructing",
+      "ingredients": [
+        {
+          "item": "actuallycreated:incomplete_example"
+        }
+      ],
+      "results": [
+        {
+          "id": "actuallycreated:incomplete_example"
+        }
+      ]
     }
   ],
   "transitional_item": {

@@ -8,8 +8,10 @@
   "actuallycreated.ponder.desk_bell_intro.text_1": "˙ןןǝq ʞsǝp ǝɥʇ sı sıɥ⟘",
   "actuallycreated.ponder.desk_bell_intro.text_2": "˙pǝssǝɹd uǝɥʍ ןɐubıs ǝuoʇspǝɹ ɐ ǝɔnpoɹd ןןıʍ ןןǝq ʞsǝp ǝɥ⟘",
   "actuallycreated.ponder.desk_bell_intro.text_3": "ɹǝʎoןdǝp ɐ buısn buɐɹ ǝq osןɐ uɐɔ ןןǝq ǝɥ⟘",
+  "actuallycreated.recipe.reconstructing": "buıʇɔnɹʇsuoɔǝᴚ",
   "block.actuallycreated.actuallycreated_generator_block": "ʞɔoןᗺ ɹoʇɐɹǝuǝ⅁ pǝʇɐǝɹɔʎןןɐnʇɔⱯ",
   "block.actuallycreated.actuallycreated_kinetic_block": "ʞɔoןᗺ ɔıʇǝuıʞ pǝʇɐǝɹɔʎןןɐnʇɔⱯ",
+  "block.actuallycreated.kinetic_atomic_reconstructor": "ɹoʇɔnɹʇsuoɔǝᴚ ɔıɯoʇⱯ ɔıʇǝuıʞ",
   "display_source.actuallycreated.actuallycreated_source": "pǝǝdS ɔıʇǝuıʞ",
   "gui.actuallycreated.actuallycreated_generator.generating": "uoıʇɐʇoɹ buıʇɐɹǝuǝ⅁",
   "gui.actuallycreated.actuallycreated_kinetic.consuming": "ssǝɹʇs buıʍɐɹᗡ",
@@ -22,5 +24,6 @@
   "item.actuallycreated.actuallycreated_result": "ʇןnsǝᴚ pǝʇɐǝɹɔʎןןɐnʇɔⱯ",
   "item.actuallycreated.incomplete_example": "ǝןdɯɐxƎ ǝʇǝןdɯoɔuI",
   "itemGroup.actuallycreated": "pǝʇɐǝɹƆ ʎןןɐnʇɔⱯ",
-  "itemGroup.actuallycreated.main_tab": "qɐ⟘ uıɐW"
+  "itemGroup.actuallycreated.main_tab": "qɐ⟘ uıɐW",
+  "recipe.actuallycreated.assembly.reconstructing": "buıʇɔnɹʇsuoɔǝᴚ"
 }
