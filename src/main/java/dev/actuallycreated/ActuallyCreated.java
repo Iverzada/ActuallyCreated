@@ -1,25 +1,12 @@
 package dev.actuallycreated;
 
-import java.util.concurrent.CompletableFuture;
 
 import dev.actuallycreated.content.ponder.ActuallyCreatedPonderPlugin;
 import dev.actuallycreated.registry.ACBlocks;
 import dev.actuallycreated.registry.ACBlockEntities;
 import dev.actuallycreated.registry.ACRecipeTypes;
 import dev.actuallycreated.registry.ACRecipeSerializers;
-import dev.actuallycreated.datagen.ActuallyCreatedCompactingRecipeGen;
-import dev.actuallycreated.datagen.ActuallyCreatedCrushingRecipeGen;
-import dev.actuallycreated.datagen.ActuallyCreatedCuttingRecipeGen;
-import dev.actuallycreated.datagen.ActuallyCreatedDeployingRecipeGen;
-import dev.actuallycreated.datagen.ActuallyCreatedEmptyingRecipeGen;
-import dev.actuallycreated.datagen.ActuallyCreatedFillingRecipeGen;
 import dev.actuallycreated.datagen.ActuallyCreatedLangMerger;
-import dev.actuallycreated.datagen.ActuallyCreatedHauntingRecipeGen;
-import dev.actuallycreated.datagen.ActuallyCreatedMillingRecipeGen;
-import dev.actuallycreated.datagen.ActuallyCreatedMixingRecipeGen;
-import dev.actuallycreated.datagen.ActuallyCreatedPressingRecipeGen;
-import dev.actuallycreated.datagen.ActuallyCreatedSequencedAssemblyGen;
-import dev.actuallycreated.datagen.ActuallyCreatedWashingRecipeGen;
 import com.tterrag.registrate.providers.ProviderType;
 import net.createmod.ponder.foundation.PonderIndex;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -27,15 +14,11 @@ import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import net.createmod.catnip.lang.FontHelper;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -68,7 +51,6 @@ public class ActuallyCreated {
 
         modBus.addListener(this::onCommonSetup);
         modBus.addListener(this::onClientSetup);
-        modBus.addListener(this::onGatherData);
     }
 
     public static ResourceLocation asResource(String path) {
@@ -111,26 +93,4 @@ public class ActuallyCreated {
         });
     }
 
-    /**
-     * Registers the data generators. Running gradlew runData writes their output into
-     * src/generated/resources.
-     */
-    private void onGatherData(GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
-        PackOutput output = generator.getPackOutput();
-        CompletableFuture<HolderLookup.Provider> registries = event.getLookupProvider();
-
-        generator.addProvider(event.includeServer(), new ActuallyCreatedSequencedAssemblyGen(output, registries));
-        generator.addProvider(event.includeServer(), new ActuallyCreatedWashingRecipeGen(output, registries));
-        generator.addProvider(event.includeServer(), new ActuallyCreatedHauntingRecipeGen(output, registries));
-        generator.addProvider(event.includeServer(), new ActuallyCreatedCrushingRecipeGen(output, registries));
-        generator.addProvider(event.includeServer(), new ActuallyCreatedMillingRecipeGen(output, registries));
-        generator.addProvider(event.includeServer(), new ActuallyCreatedPressingRecipeGen(output, registries));
-        generator.addProvider(event.includeServer(), new ActuallyCreatedCuttingRecipeGen(output, registries));
-        generator.addProvider(event.includeServer(), new ActuallyCreatedMixingRecipeGen(output, registries));
-        generator.addProvider(event.includeServer(), new ActuallyCreatedCompactingRecipeGen(output, registries));
-        generator.addProvider(event.includeServer(), new ActuallyCreatedFillingRecipeGen(output, registries));
-        generator.addProvider(event.includeServer(), new ActuallyCreatedEmptyingRecipeGen(output, registries));
-        generator.addProvider(event.includeServer(), new ActuallyCreatedDeployingRecipeGen(output, registries));
-    }
 }

@@ -1,23 +1,31 @@
 {
   "type": "create:sequenced_assembly",
   "ingredient": {
-    "item": "minecraft:iron_ingot"
+    "item": "minecraft:amethyst_shard"
   },
-  "loops": 2,
-  "results": [
-    {
-      "id": "actuallycreated:actuallycreated_result"
-    }
-  ],
+  "transitional_item": {
+    "id": "actuallycreated:incomplete_example"
+  },
+  "loops": 1,
   "sequence": [
     {
-      "type": "create:deploying",
+      "type": "actuallycreated:reconstructing",
       "ingredients": [
         {
           "item": "actuallycreated:incomplete_example"
-        },
+        }
+      ],
+      "results": [
         {
-          "item": "minecraft:copper_ingot"
+          "id": "actuallycreated:incomplete_example"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "actuallycreated:incomplete_example"
         }
       ],
       "results": [
@@ -53,7 +61,10 @@
       ]
     }
   ],
-  "transitional_item": {
-    "id": "actuallycreated:incomplete_example"
-  }
+  "results": [
+    {
+      "id": "actuallycreated:actuallycreated_result",
+      "chance": 1.0
+    }
+  ]
 }

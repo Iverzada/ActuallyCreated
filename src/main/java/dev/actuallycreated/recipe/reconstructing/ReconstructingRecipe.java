@@ -16,6 +16,7 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 
+/** Laser operation embedded in Create sequenced assemblies; not a standalone conversion. */
 public class ReconstructingRecipe extends StandardProcessingRecipe<SingleRecipeInput> implements IAssemblyRecipe {
     public ReconstructingRecipe(ProcessingRecipeParams params) {
         super(ACRecipeTypes.RECONSTRUCTING, params);
@@ -23,7 +24,7 @@ public class ReconstructingRecipe extends StandardProcessingRecipe<SingleRecipeI
 
     @Override
     public boolean matches(SingleRecipeInput input, Level level) {
-        return !input.isEmpty() && getIngredients().getFirst().test(input.getItem(0));
+        return false;
     }
 
     @Override protected int getMaxInputCount() { return 1; }
@@ -37,7 +38,6 @@ public class ReconstructingRecipe extends StandardProcessingRecipe<SingleRecipeI
         return Component.translatable("recipe.actuallycreated.assembly.reconstructing");
     }
     @Override public Supplier<Supplier<SequencedAssemblySubCategory>> getJEISubCategory() {
-        // Placeholder visualization until the reconstructor gets its own JEI animation.
-        return () -> SequencedAssemblySubCategory.AssemblyPressing::new;
+        return () -> dev.actuallycreated.compat.jei.ReconstructingAssemblyStep::new;
     }
 }

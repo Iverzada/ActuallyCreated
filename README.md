@@ -1,186 +1,71 @@
-# Create Mod Addon Template
+# Actually Created
 
-A ready-to-use template for building [Create](https://modrinth.com/mod/create) mod addons with **Java** and **NeoForge 1.21.1**.
+Create / Actually Additions integration for Minecraft 1.21.1 (NeoForge).
 
-## What's Included
+## Kinetic Atomic Reconstructor
 
-- **NeoForge 1.21.1** with Create 6.0.10 dependency
-- **Create Registrate** — Create's registration system, pre-configured
-- **Ponder & Flywheel** — Create's rendering and documentation libraries
-- **JEI** — recipe viewer integration (optional, compile-only)
-- **Mixin support** — pre-configured mixins
-- **GitHub Actions** — automatic builds on push/PR
-- **Gradle 8.10** with configuration cache enabled
+The kinetic reconstructor uses Actually Additions' native `actuallyadditions:laser`
+recipes directly from the world recipe manager. Datapack changes to those recipes
+apply automatically. The kinetic block is a catalyst for Actually Additions' existing JEI category:
+press U over it to see native Atomic Reconstructor recipes. No duplicate conversion
+category is registered.
 
-## Examples
+Connect rotation to the rear shaft and aim the front along the item path. The
+machine consumes 16 SU per RPM. Its cooldown is `ceil(2560 / abs(RPM))` ticks;
+without rotation it does not fire. Each shot converts up to four input items from
+one stack, using the native recipe's output and count. Rotation powers the kinetic
+variant instead of FE. Range follows Create's fan configuration; obstacles stop it.
 
-The template ships small examples of the most common Create addon
-additions. All of their recipes and assets are produced by data generation
-(`./gradlew runData`) into `src/generated/resources` — nothing is hand-written.
+Dropped items, Create depots and belts are supported. Aim along the space above
+the depot/belt (the machine is one block higher than the transport block).
+The machine checks live items each ready tick, so insertion, belt movement and
+assembly updates automatically trigger a visible laser shot, respecting the RPM
+cooldown. Unprocessed items are preserved; depot outputs use Create's output buffer.
 
-- **SU-consuming kinetic block + goggle overlay** — `content/kinetics/ActuallyCreatedKineticBlock` +
-  `ActuallyCreatedKineticBlockEntity`. An encased-shaft-style block that joins the kinetic
-  network and draws Stress Units. Its stress impact is registered on the block in
-  `AllBlocks` via `BlockStressValues.IMPACTS` (from the shared `STRESS_IMPACT` constant).
-  Its model is an inset casing and `ActuallyCreatedShaftRenderer` spins a Create shaft that pokes
-  out of it, so the rotation is actually visible. It overrides `addToGoggleTooltip` to add
-  a live "Drawing stress" readout beneath the default kinetic stats.
-- **Kinetic generator + goggle overlay** — `content/kinetics/ActuallyCreatedGeneratorBlock` +
-  `ActuallyCreatedGeneratorBlockEntity`. The counterpart source: it *adds* stress capacity
-  (`BlockStressValues.CAPACITIES`, registered in `AllBlocks`) and produces rotation via
-  `getGeneratedSpeed()`. Crucially it overrides `initialize()` to call
-  `updateGeneratedRotation()` — without that a generator never pushes its speed into the
-  network and nothing turns. It shares `ActuallyCreatedShaftRenderer` and adds custom lines to the
-  Engineer's Goggles tooltip (`IHaveGoggleInformation#addToGoggleTooltip`).
-- **Display Link source** — `content/display/ActuallyCreatedDisplaySource` + `AllDisplaySources`.
-  A `DisplaySource` that reports a block's kinetic speed onto a Display Board; attached
-  to the generator in `AllBlocks` via `.transform(DisplaySource.displaySource(...))`.
-- **Processing recipes** — `datagen/Example*RecipeGen` for crushing, milling, pressing,
-  cutting, mixing (heated), compacting, filling & emptying (fluids), and deploying,
-  plus **splashing** and **haunting** fan processing.
-- **Sequenced assembly recipe** — `datagen/ActuallyCreatedSequencedAssemblyGen`. An item is
-  processed through a Deployer then a Mechanical Press, looping twice, using a
-  transitional "incomplete" item.
-- **Ponder plugin** — `content/ponder/ActuallyCreatedPonderPlugin` +
-  `ActuallyCreatedPonderScenes`. Wires up Create's in-game animated manual for the addon and
-  is registered client-side in `ActuallyCreated#onClientSetup`. Ships a worked scene driven
-  by the `assets/actuallycreated/ponder/actuallycreated_ponder.nbt` schematic (two Mechanical Arms and
-  a sign), demonstrating base-plate reveal, camera panning, and outlined captions. Its
-  scene text is generated into `en_us.json` through Registrate's lang provider
-  (`ActuallyCreated#registerPonderLang`), so it appears after `./gradlew runData`.
+## Original Actually Additions reconstructor
 
-- **Create-style item tooltip** — the `actuallycreated_item`'s tooltip is authored as lang keys in
-  `assets/actuallycreated/lang/default/tooltips.json` (`.tooltip.summary` +
-  `.tooltip.condition1`/`.behaviour1`). The `ItemDescription` modifier set up on the
-  Registrate in `ActuallyCreated` reads them and adds the "Hold Shift" prompt and highlight
-  styling automatically — no custom `Item` class needed. Wrap words in `_underscores_` to
-  highlight them.
-- **Lang: keys in code, copy in JSON** — like Create, English strings live in hand-authored
-  partials under `assets/actuallycreated/lang/default/` (`interface.json`, `tooltips.json`), while
-  `Lang` holds only translation keys. `datagen/ActuallyCreatedLangMerger` merges the partials into the
-  `en_us.json` that Registrate generates for block/item names, so `./gradlew runData` writes a
-  single lang file. Add copy by editing a partial (or dropping a new one and listing it in
-  `ActuallyCreatedLangMerger`) — never by putting English in Java.
-- **Additional languages** — `assets/actuallycreated/lang/de_de.json` is a worked German
-  translation. Registrate only *generates* `en_us`, so every other language is a plain static
-  file (exactly how Create ships its Crowdin translations): copy the keys from the generated
-  `en_us.json`, translate the values, and Minecraft overlays them when that language is
-  selected, falling back to `en_us` for any key you leave out. It needs no datagen — the file
-  is loaded as-is. (`_underscores_` and `%s` placeholders must be kept in the translation.)
+The original `actuallyadditions:atomic_reconstructor` conversion lens also processes
+Create depots and belts in its beam path, including the laser assembly operation.
+Its normal automatic timer, pulse/redstone control, range and 1,000 FE firing cost
+are preserved. Native conversions additionally consume the recipe's FE cost per
+item; assembly laser steps consume 1,000 FE. Insufficient energy leaves the remaining
+input on the transport. Other lens types keep their original behaviour.
 
-Item models borrow existing vanilla textures so the template builds with **no `.png`
-files of its own** — swap the textures in `AllItems`/`AllBlocks` for your own art.
+The kinetic beam stays on the facing axis and accounts for Actually Additions'
+particle renderer centering offset.
 
-## Getting Started
+## Sequenced assembly
 
-### Quickest: scaffold with create-addon-cli
+Test recipe: one `minecraft:amethyst_shard` ? laser ? press ? press ? laser ?
+one `actuallycreated:actuallycreated_result` (100% chance, one loop). The intermediate
+item is `actuallycreated:incomplete_example`. Search the result in JEI to view it.
 
-Use the [create-addon-cli](https://github.com/StaticFX/create-addon-cli) tool for quick scaffolding
+Datapacks can embed an `actuallycreated:reconstructing` operation in a
+`create:sequenced_assembly` sequence using Create's standard processing step format:
 
-```bash
-npm create addon-cli@latest
-# or
-npx create-addon-cli my-mod --name "Sick Mod"
+```json
+{
+  "type": "actuallycreated:reconstructing",
+  "ingredients": [{ "item": "yourpack:incomplete_item" }],
+  "results": [{ "id": "yourpack:incomplete_item" }]
+}
 ```
 
-It clones this template and rebrands every `Example` / `actuallycreated` reference to your
-mod. The scaffolder lives in its own repo,
-[`create-addon-cli`](https://github.com/StaticFX/create-addon-cli). Skip straight to
-[Build and run](#build-and-run).
+This is an assembly operation only, not a separate family of conversion recipes.
+The enclosing Create recipe supplies the transitional item, loops and final result.
+Each shot advances one item by one laser step. An item waiting for a different step
+is not converted by native laser recipes. The laser step is displayed inside
+Create's existing sequenced assembly JEI category.
 
-### Or: use the GitHub template
+## Development
 
-#### 1. Use this template
+- `./gradlew build`: compile and package the addon.
+- `./gradlew runGameTestServer`: verify native recipes, depot/belt conversions,
+  assembly decoding/progression, cooldown, obstacles and item conservation.
+- `./gradlew runData`: regenerate models, translations and loot tables.
+- `./gradlew runClient`: launch the development client.
 
-Click **"Use this template"** on GitHub, or clone and rename.
+Dependencies: Create 6.0.10 and Actually Additions 1.3.26. The development runtime
+also includes Patchouli, PatchouliProvider and Curios for Actually Additions.
 
-#### 2. Rename it to your mod
-
-Run the bootstrap task once — it rewrites every `Example` / `actuallycreated` reference,
-moves the Java package, renames the `Example*` classes and the mixin config, and
-clears `src/generated`:
-
-```bash
-./gradlew renameMod --name "Sick Mod"
-# optional overrides:
-./gradlew renameMod --name "Sick Mod" --id sickmod --group com.acme.sickmod
-```
-`--id` defaults to the name lowercased (`sickmod`); `--group` defaults to
-`com.example.<id>`. Commit or stash first — it edits files in place; review the
-result with `git diff`. Once you're happy, delete `gradle/rename-mod.gradle` and its
-`apply from:` line in `build.gradle`, then regenerate assets with `./gradlew runData`.
-
-*!! Be sure to rerun the data gen after renaming your mod: `./gradlew runData` !!*
-
-
-Finish up in `gradle.properties` (author, description, version, license):
-
-```properties
-mod_version=0.1.0
-mod_authors=YourName
-mod_description=Your mod description.
-mod_license=MIT
-```
-
-<details>
-<summary>Prefer to rename by hand?</summary>
-
-1. Edit `mod_id` / `mod_name` / `mod_group_id` in `gradle.properties`
-2. Rename `src/main/java/com/example/actuallycreated/` to match your `mod_group_id`
-3. Update `ActuallyCreated.java` — change `ID` to your `mod_id`
-4. Rename `src/main/resources/actuallycreated.mixins.json` to `{mod_id}.mixins.json` and
-   update the `package` path inside it
-</details>
-
-### Build and run
-
-```bash
-./gradlew build          # Build the mod
-./gradlew runClient      # Launch Minecraft with your mod
-./gradlew runServer      # Launch a dedicated server
-./gradlew runData        # Run data generators
-```
-
-### Actually Created: data generation
-
-After renaming the mod or changing registrations, run `./gradlew runData` before
-`./gradlew build`. Commit the generated files in `src/generated/resources` so a
-fresh checkout includes the models, translations, loot tables, and recipes.
-
-Actually Additions 1.3.26 loads PatchouliProvider and Curios during its data event,
-even when generating only this addon's resources. The development runtime includes
-both dependencies, matching the [Actually Additions build configuration](https://github.com/Ellpeck/ActuallyAdditions/blob/main/build.gradle).
-
-### Kinetic Atomic Reconstructor (first implementation)
-
-Place the block with its front facing the item path and connect Create rotation to its
-rear face. It consumes 16 SU per RPM and fires only while rotating. Cooldown is
-`ceil(2560 / abs(RPM))` ticks, with a minimum of one tick. Each shot selects one
-valid dropped item stack in front, up to the Encased Fan's configured range, and
-performs up to four recipe operations. A Sequenced Assembly step performs one
-operation and lets Create advance its transitional item.
-
-Datapacks can add `actuallycreated:reconstructing` recipes using Create's processing
-format: `ingredients` is a list with one item ingredient and `results` is a list
-with one output object using `id` (and optional `count`). The included
-`coal_to_diamond.json` is a small demonstration recipe. When JEI is installed,
-the optional `actuallycreated:reconstructing` category shows these recipes and
-uses the Kinetic Atomic Reconstructor as its catalyst.
-
-TODO: handle transported items on belts and depots through Create's
-`BeltProcessingBehaviour`; implement the `NativeReconstructionAdapter` against
-Actually Additions' laser recipes; add final visuals and a dedicated JEI assembly
-animation. The current model uses vanilla polished andesite as a placeholder.
-
-`./gradlew runGameTestServer` checks that the datapack recipe and Sequenced
-Assembly step decode, and verifies rear-only shaft placement and reference
-cooldowns. The test uses the project's existing desk bell structure as a small
-test template.
-
-## Where to start?
-
-1. Go into your ActuallyCreated.java class to get a quick overview over what is defined and where exactly.
-
-## License
-
-This template is provided under the [MIT License](LICENSE). Your mod built from this template can use any license you choose.
+Licensed under MIT; see [LICENSE](LICENSE).

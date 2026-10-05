@@ -1,16 +1,20 @@
 package dev.actuallycreated.recipe.reconstructing;
 
-import net.minecraft.world.entity.item.ItemEntity;
+import java.util.Optional;
+import de.ellpeck.actuallyadditions.mod.crafting.ActuallyRecipes;
+import de.ellpeck.actuallyadditions.mod.crafting.LaserRecipe;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 
-/**
- * Boundary for Actually Additions laser recipes. A future implementation should query its
- * recipe manager directly and perform at most maxOperations conversions on one target.
- */
-@FunctionalInterface
-public interface NativeReconstructionAdapter {
-    boolean tryProcess(Level level, ItemEntity target, int maxOperations);
+/** Uses the world's native laser recipes, including datapack reloads. */
+public final class NativeReconstructionAdapter {
+    private NativeReconstructionAdapter() {}
 
-    // TODO: replace with an adapter for Actually Additions' native LaserRecipe type.
-    NativeReconstructionAdapter NONE = (level, target, maxOperations) -> false;
+    public static Optional<RecipeHolder<LaserRecipe>> find(Level level, ItemStack input) {
+        // LaserRecipe.matches(RecipeInput, Level) always returns false in AA 1.3.26.
+        return level.getRecipeManager().getAllRecipesFor(ActuallyRecipes.Types.LASER.get()).stream()
+                .filter(holder -> holder.value().matches(input))
+                .findFirst();
+    }
 }

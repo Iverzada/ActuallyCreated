@@ -4,6 +4,9 @@
   "package": "dev.actuallycreated.mixin",
   "compatibilityLevel": "JAVA_21",
   "refmap": "actuallycreated.refmap.json",
+  "mixins": [
+    "ConversionLensMixin"
+  ],
   "client": [
     "PonderSceneAccessor"
   ],
