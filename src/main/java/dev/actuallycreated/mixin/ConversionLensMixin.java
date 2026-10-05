@@ -16,5 +16,7 @@ public class ConversionLensMixin {
     private void actuallycreated$processTransported(BlockState state, BlockPos pos,
             IAtomicReconstructor source, CallbackInfoReturnable<Boolean> cir) {
         if (NativeTransportedReconstruction.process(pos, source)) cir.setReturnValue(true);
+        else if (pos != null && NativeTransportedReconstruction.isTransport(source.getWorldObject(), pos))
+            cir.setReturnValue(false); // Empty transport segments must not stop the beam.
     }
 }

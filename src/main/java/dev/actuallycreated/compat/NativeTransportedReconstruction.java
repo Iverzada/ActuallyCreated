@@ -21,8 +21,32 @@ public final class NativeTransportedReconstruction {
     private NativeTransportedReconstruction() {}
 
     public static boolean process(BlockPos beamPos, IAtomicReconstructor source) {
+        return process(beamPos, source, false);
+    }
+
+    public static boolean isTransport(net.minecraft.world.level.Level level, BlockPos pos) {
+        return level.isLoaded(pos) && BlockEntityBehaviour.get(level, pos, TransportedItemStackHandlerBehaviour.TYPE) != null;
+    }
+
+    /** Read-only probe used to wake the native automatic timer when an item arrives. */
+    public static boolean hasTarget(IAtomicReconstructor source) {
+        var level = source.getWorldObject();
+        for (int distance = 1; distance <= source.getLens().getDistance(); distance++) {
+            var pos = source.getPosition().relative(source.getOrientation(), distance);
+            if (!level.isLoaded(pos)) break;
+            boolean transport = isTransport(level, pos);
+            if (!level.getBlockState(pos).isAir() && !transport) break;
+            if (process(pos, source, true)) return true;
+        }
+        return false;
+    }
+
+    private static boolean process(BlockPos beamPos, IAtomicReconstructor source, boolean simulate) {
         var level = source.getWorldObject();
         if (level == null || level.isClientSide || beamPos == null) return false;
+        if (!level.getBlockState(beamPos).isAir() && !isTransport(level, beamPos)) return false;
+        int availableEnergy = source.getEnergy() - (simulate ? 1000 : 0);
+        if (availableEnergy < 0) return false;
         // A horizontal beam can reach items resting on the transport block below it.
         int offsets = source.getOrientation().getAxis().isHorizontal() ? 1 : 0;
         for (int offset = 0; offset <= offsets; offset++) {
@@ -41,19 +65,23 @@ public final class NativeTransportedReconstruction {
                         ACRecipeTypes.RECONSTRUCTING.getType(), ReconstructingRecipe.class);
                 if (assembly.isPresent()) {
                     energy = 1000;
-                    if (source.getEnergy() < energy) return TransportedResult.doNothing();
+                    if (availableEnergy < energy) return TransportedResult.doNothing();
                     count = 1;
-                    results.addAll(assembly.get().value().rollResults(level.random));
+                    if (!simulate) results.addAll(assembly.get().value().rollResults(level.random));
                 } else {
                     if (item.stack.has(AllDataComponents.SEQUENCED_ASSEMBLY)) return TransportedResult.doNothing();
                     var recipe = NativeReconstructionAdapter.find(level, item.stack);
                     if (recipe.isEmpty()) return TransportedResult.doNothing();
                     int cost = Math.max(0, recipe.get().value().getEnergy());
-                    count = cost == 0 ? item.stack.getCount() : Math.min(item.stack.getCount(), source.getEnergy() / cost);
+                    count = cost == 0 ? item.stack.getCount() : Math.min(item.stack.getCount(), availableEnergy / cost);
                     if (count <= 0) return TransportedResult.doNothing();
                     energy = count * cost;
                     for (int i = 0; i < count; i++)
                         results.add(recipe.get().value().getResultItem(level.registryAccess()).copy());
+                }
+                if (simulate) {
+                    processed[0] = true;
+                    return TransportedResult.doNothing();
                 }
                 List<TransportedItemStack> outputs = new ArrayList<>();
                 if (count < item.stack.getCount()) {
