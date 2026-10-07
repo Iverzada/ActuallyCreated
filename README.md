@@ -1,49 +1,70 @@
 # Actually Created
 
-Create / Actually Additions integration for Minecraft 1.21.1 (NeoForge).
+Ever looked at Create and Actually Additions and thought, “yeah, these two should
+probably talk to each other”? That is pretty much the idea here.
 
-## Kinetic Atomic Reconstructor
+Actually Created is a small integration addon for **Minecraft 1.21.1**, running on
+**NeoForge**. It lets Create's kinetic machinery work with Actually Additions'
+Atomic Reconstructor recipes, adds support for reconstruction during sequenced
+assembly, and throws in a Coffee Press because no factory should run uncaffeinated.
 
-The kinetic reconstructor uses Actually Additions' native `actuallyadditions:laser`
-recipes directly from the world recipe manager. Datapack changes to those recipes
-apply automatically. The kinetic block is a catalyst for Actually Additions' existing JEI category:
-press U over it to see native Atomic Reconstructor recipes. No duplicate conversion
-category is registered.
+## What does it add?
 
-Connect rotation to the rear shaft and aim the front along the item path. The
-machine consumes 16 SU per RPM. Its cooldown is `ceil(2560 / abs(RPM))` ticks;
-without rotation it does not fire. Each shot converts up to four input items from
-one stack, using the native recipe's output and count. Rotation powers the kinetic
-variant instead of FE. Range follows Create's fan configuration; obstacles stop it.
+### Kinetic Atomic Reconstructor
 
-Dropped items, Create depots and belts are supported. Aim along the space above
-the depot/belt (the machine is one block higher than the transport block).
-The machine checks live items each ready tick, so insertion, belt movement and
-assembly updates automatically trigger a visible laser shot, respecting the RPM
-cooldown. Unprocessed items are preserved; depot outputs use Create's output buffer.
+This is the Atomic Reconstructor's rotation-powered cousin. Hook a shaft up to the
+back, point the front at whatever deserves to be lasered and give it some RPM.
+No FE required—Create has already convinced us that spinning things solves most
+engineering problems.
 
-## Original Actually Additions reconstructor
+It uses Actually Additions' own `actuallyadditions:laser` recipes straight from
+the recipe manager, so recipes added or changed by datapacks and KubeJS work
+automatically. In JEI, hover over the block and press `U` to see the usual Atomic
+Reconstructor recipes; the addon does not add a second, duplicate category.
 
-The original `actuallyadditions:atomic_reconstructor` conversion lens also processes
-Create depots and belts in its beam path, including the laser assembly operation.
-Use the Actually Additions redstone configuration item to cycle Automatic → Pulse →
-Created → Automatic. In Created Mode, the reconstructor fires only when a depot or
-belt holds an item with a currently valid native `actuallyadditions:laser` recipe
-or `actuallycreated:reconstructing` assembly step. Recipes loaded through datapacks
-or KubeJS are discovered through the recipe manager. It checks every tick and can
-fire once per tick while a valid target remains. Redstone does not trigger or disable Created Mode.
-The native range and 1,000 FE firing cost apply. Native conversions additionally
-consume the recipe's FE cost per item; assembly laser steps consume 1,000 FE.
-Insufficient energy leaves the remaining input on the transport. Other lens types
-keep their original behaviour.
+A few useful numbers:
 
-The kinetic beam stays on the facing axis and accounts for Actually Additions'
-particle renderer centering offset.
+- The machine uses **16 SU per RPM**.
+- Its cooldown is `ceil(2560 / abs(RPM))` ticks.
+- One shot converts up to **four items** from a single stack.
+- With no rotation, it does exactly what you would expect: absolutely nothing.
+- Its range follows Create's fan range setting, and solid obstacles block the beam.
 
-## Sequenced assembly
+Dropped items, Create depots and belts are all supported. When using a depot or
+belt, aim through the space directly above it—the reconstructor sits one block
+higher than the transport block. It checks for items whenever it is ready to fire,
+so new items and moving belts are picked up automatically. Items it cannot process
+are left alone, and depot results use Create's output buffer.
 
-Datapacks can embed an `actuallycreated:reconstructing` operation in a
-`create:sequenced_assembly` sequence using Create's standard processing step format:
+### The original Atomic Reconstructor gets invited too
+
+Actually Additions' regular `actuallyadditions:atomic_reconstructor` can also hit
+items on Create depots and belts, including items going through sequenced assembly.
+Use the Actually Additions redstone configuration item to cycle through:
+
+`Automatic → Pulse → Created → Automatic`
+
+In **Created Mode**, it only fires when a depot or belt has an item with a valid
+native laser recipe or an `actuallycreated:reconstructing` assembly step. Recipes
+loaded from datapacks or KubeJS are found through the recipe manager, so you do not
+need to teach the machine any new tricks by hand.
+
+The machine checks every tick and may fire once per tick while a valid target is
+still there. Redstone neither triggers nor disables Created Mode—it has politely
+stepped aside for once. The normal range and **1,000 FE** firing cost still apply.
+Native conversions also use the recipe's FE cost per item, while an assembly laser
+step costs **1,000 FE**. If the machine runs out of energy, the remaining items stay
+on the transport instead of vanishing into the void. Other lenses keep their normal
+Actually Additions behaviour.
+
+One small visual detail: the kinetic beam stays on the facing axis while accounting
+for Actually Additions' particle-rendering offset, so the laser goes where the
+machine is pointing instead of developing artistic ambitions.
+
+### Sequenced assembly with lasers
+
+Datapacks can place an `actuallycreated:reconstructing` operation inside a standard
+Create `create:sequenced_assembly` recipe:
 
 ```json
 {
@@ -53,21 +74,24 @@ Datapacks can embed an `actuallycreated:reconstructing` operation in a
 }
 ```
 
-This is an assembly operation only, not a separate family of conversion recipes.
-The enclosing Create recipe supplies the transitional item, loops and final result.
-Each shot advances one item by one laser step. An item waiting for a different step
-is not converted by native laser recipes. The laser step is displayed inside
-Create's existing sequenced assembly JEI category.
+This is an assembly operation, not a whole new family of conversion recipes. The
+outer Create recipe still controls the transitional item, loop count and final
+result. Each shot advances one item by one laser step. If an item is waiting for a
+different step, native laser recipes leave it alone. JEI shows the laser step in
+Create's regular sequenced assembly category.
 
-## Development
+### Coffee Press
 
-- `./gradlew build`: compile and package the addon.
-- `./gradlew runGameTestServer`: verify native recipes, depot/belt conversions,
-  assembly decoding/progression, cooldown, obstacles and item conservation.
-- `./gradlew runData`: regenerate models, translations and loot tables.
-- `./gradlew runClient`: launch the development client.
+The Coffee Press turns Actually Additions coffee beans—and an optional extra
+ingredient—into drinkable coffee fluids using rotational power. It has a **4,000 mB**
+internal tank, accepts fluid filters and outputs from the bottom. Put the finished
+coffee into an Actually Additions cup with a Create spout, then send it to whoever
+forgot to lubricate the gearbox.
 
-Dependencies: Create 6.0.10 and Actually Additions 1.3.26. The development runtime
-also includes Patchouli, PatchouliProvider and Curios for Actually Additions.
+The faster the press spins, the faster it brews, down to a minimum processing time
+of 20 ticks. Its recipes are data-driven too, because hard-coded coffee menus are
+how workplace arguments begin.
 
-Licensed under MIT; see [LICENSE](LICENSE).
+## License
+
+Actually Created is licensed under the [MIT License](LICENSE).
