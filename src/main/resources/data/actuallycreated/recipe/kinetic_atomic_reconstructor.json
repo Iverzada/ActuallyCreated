@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "ESE",
+    "RAR",
+    "EOE"
+  ],
+  "key": {
+    "A": {
+      "item": "actuallyadditions:iron_casing"
+    },
+    "S": {
+      "item": "create:shaft"
+    },
+    "E": {
+      "item": "create:andesite_casing"
+    },
+    "O": {
+      "item": "minecraft:observer"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "id": "actuallycreated:kinetic_atomic_reconstructor",
+    "count": 1
+  }
+}

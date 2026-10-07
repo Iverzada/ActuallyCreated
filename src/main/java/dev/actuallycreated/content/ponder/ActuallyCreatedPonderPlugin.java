@@ -1,6 +1,5 @@
 package dev.actuallycreated.content.ponder;
 
-import dev.actuallycreated.AllBlocks;
 import dev.actuallycreated.ActuallyCreated;
 
 import net.createmod.ponder.api.registration.PonderPlugin;
@@ -22,9 +21,6 @@ public class ActuallyCreatedPonderPlugin implements PonderPlugin {
 
     @Override
     public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        helper.forComponents(AllBlocks.EXAMPLE_KINETIC_BLOCK.getId())
-                .addStoryBoard("actuallycreated_ponder", ActuallyCreatedPonderScenes::examplePonder);
-
         helper.forComponents(com.simibubi.create.AllBlocks.DESK_BELL.getId())
                 .addStoryBoard("desk_bell", DeskbellScenes::intro);
     }

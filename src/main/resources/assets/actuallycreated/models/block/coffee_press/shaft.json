@@ -1,0 +1,24 @@
+{
+	"format_version": "26.3",
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"axis_top": "actuallycreated:block/kinetic_atomic_reconstructor/axis_top",
+		"axis": "actuallycreated:block/kinetic_atomic_reconstructor/axis"
+	},
+	"elements": [
+		{
+			"from": [6, 6, 16],
+			"to": [10, 10, 17],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 8, 15]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#axis_top"},
+				"east": {"uv": [8, 5, 10, 7], "texture": "#axis"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#axis_top"},
+				"west": {"uv": [8, 5, 10, 7], "texture": "#axis"},
+				"up": {"uv": [8, 5, 10, 7], "texture": "#axis"},
+				"down": {"uv": [8, 5, 10, 7], "texture": "#axis"}
+			}
+		}
+	]
+}

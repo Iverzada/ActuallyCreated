@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["ASA", "KCK", "KEK"],
+  "key": {
+    "A": { "item": "actuallyadditions:iron_casing" },
+    "S": { "item": "create:mechanical_press" },
+    "C": { "item": "create:fluid_tank" },
+    "K": { "item": "create:andesite_casing" },
+    "E": { "item": "actuallyadditions:empty_cup" }
+  },
+  "result": { "id": "actuallycreated:coffee_press", "count": 1 }
+}

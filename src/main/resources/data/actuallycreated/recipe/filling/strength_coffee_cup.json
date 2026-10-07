@@ -1,0 +1,13 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    { "item": "actuallyadditions:empty_cup" },
+    { "type": "neoforge:single", "amount": 250, "fluid": "actuallycreated:strength_coffee" }
+  ],
+  "results": [{
+    "id": "actuallyadditions:coffee_cup",
+    "components": {
+      "minecraft:custom_data": { "Counter": 1, "1": { "ID": "minecraft:strength", "Duration": 15, "Amplifier": 0 } }
+    }
+  }]
+}

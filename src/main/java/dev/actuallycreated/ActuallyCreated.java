@@ -6,6 +6,10 @@ import dev.actuallycreated.registry.ACBlocks;
 import dev.actuallycreated.registry.ACBlockEntities;
 import dev.actuallycreated.registry.ACRecipeTypes;
 import dev.actuallycreated.registry.ACRecipeSerializers;
+import dev.actuallycreated.registry.ACFluids;
+import dev.actuallycreated.content.coffee.CoffeePressBlockEntity;
+import dev.actuallycreated.content.reconstructor.KineticAtomicReconstructorBlockEntity;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import dev.actuallycreated.datagen.ActuallyCreatedLangMerger;
 import com.tterrag.registrate.providers.ProviderType;
 import net.createmod.ponder.foundation.PonderIndex;
@@ -40,17 +44,21 @@ public class ActuallyCreated {
         REGISTRATE.setCreativeTab(AllCreativeModeTabs.MAIN_TAB);
         registerLangPartials();
         registerPonderLang();
-        AllItems.register();
         AllDisplaySources.register();
-        AllBlocks.register();
-        AllBlockEntityTypes.register();
         ACBlocks.register();
+        ACFluids.register();
         ACBlockEntities.register();
         ACRecipeTypes.register();
         ACRecipeSerializers.register();
 
         modBus.addListener(this::onCommonSetup);
         modBus.addListener(this::onClientSetup);
+        modBus.addListener(this::registerCapabilities);
+    }
+
+    private void registerCapabilities(RegisterCapabilitiesEvent event) {
+        CoffeePressBlockEntity.registerCapabilities(event);
+        KineticAtomicReconstructorBlockEntity.registerCapabilities(event);
     }
 
     public static ResourceLocation asResource(String path) {

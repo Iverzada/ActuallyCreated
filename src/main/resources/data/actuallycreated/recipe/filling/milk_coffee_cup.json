@@ -1,0 +1,8 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    { "item": "actuallyadditions:empty_cup" },
+    { "type": "neoforge:single", "amount": 250, "fluid": "actuallycreated:milk_coffee" }
+  ],
+  "results": [{ "id": "actuallyadditions:coffee_cup" }]
+}

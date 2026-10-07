@@ -1,0 +1,93 @@
+{
+	"format_version": "26.3",
+	"credit": "Actually Created - Coffee Press plunger optimized",
+	"parent": "minecraft:block/block",
+	"ambientocclusion": false,
+	"textures": {
+		"1": "actuallycreated:block/coffee_press/copper",
+		"2": "actuallycreated:block/coffee_press/brass_pin",
+		"3": "actuallycreated:block/coffee_press/brassside",
+		"4": "actuallycreated:block/coffee_press/tankbot",
+		"particle": "actuallycreated:block/coffee_press/copper"
+	},
+	"elements": [
+		{
+			"name": "rod",
+			"from": [7.25, 8, 7.25],
+			"to": [8.75, 16, 8.75],
+			"faces": {
+				"north": {"uv": [5, 0, 12, 15], "texture": "#1"},
+				"east": {"uv": [5, 0, 12, 15], "texture": "#1"},
+				"south": {"uv": [5, 0, 12, 15], "texture": "#1"},
+				"west": {"uv": [5, 0, 12, 15], "texture": "#1"},
+				"up": {"uv": [5, 0, 12, 15], "texture": "#1"},
+				"down": {"uv": [7.25, 7.25, 8.75, 8.75], "texture": "#missing"}
+			}
+		},
+		{
+			"name": "collar_front",
+			"from": [6.5, 13.5, 6.5],
+			"to": [9.5, 16, 7.25],
+			"faces": {
+				"north": {"uv": [0, 4, 16, 12], "texture": "#2"},
+				"east": {"uv": [6, 0, 4.5, 3], "texture": "#3"},
+				"south": {"uv": [6.5, 1, 9.5, 2.5], "texture": "#missing"},
+				"west": {"uv": [1.5, 0, 0, 3], "texture": "#3"},
+				"up": {"uv": [0, 4, 16, 0], "texture": "#2"},
+				"down": {"uv": [0, 16, 16, 12], "texture": "#2"}
+			}
+		},
+		{
+			"name": "collar_back",
+			"from": [6.5, 13.5, 8.75],
+			"to": [9.5, 16, 9.5],
+			"faces": {
+				"north": {"uv": [6.5, 1, 9.5, 2.5], "texture": "#2"},
+				"east": {"uv": [1.5, 0, 0, 3], "texture": "#3"},
+				"south": {"uv": [0, 4, 16, 12], "texture": "#2"},
+				"west": {"uv": [6, 0, 4.5, 3], "texture": "#3"},
+				"up": {"uv": [0, 0, 16, 4], "texture": "#2"},
+				"down": {"uv": [0, 12, 16, 16], "texture": "#2"}
+			}
+		},
+		{
+			"name": "collar_left",
+			"from": [6.5, 13.5, 7.25],
+			"to": [7.25, 16, 8.75],
+			"faces": {
+				"north": {"uv": [8.75, 1, 9.5, 2.5], "texture": "#2"},
+				"east": {"uv": [7.25, 1, 8.75, 2.5], "texture": "#2"},
+				"south": {"uv": [6.5, 1, 7.25, 2.5], "texture": "#2"},
+				"west": {"uv": [0, 4, 16, 12], "texture": "#2"},
+				"up": {"uv": [0, 0, 6, 3], "rotation": 90, "texture": "#3"},
+				"down": {"uv": [0, 0, 6, 3], "rotation": 90, "texture": "#3"}
+			}
+		},
+		{
+			"name": "collar_right",
+			"from": [8.75, 13.5, 7.25],
+			"to": [9.5, 16, 8.75],
+			"faces": {
+				"north": {"uv": [6.5, 1, 7.25, 2.5], "texture": "#missing"},
+				"east": {"uv": [0, 4, 16, 12], "texture": "#2"},
+				"south": {"uv": [8.75, 1, 9.5, 2.5], "texture": "#missing"},
+				"west": {"uv": [7.25, 1, 8.75, 2.5], "texture": "#missing"},
+				"up": {"uv": [0, 0, 6, 3], "rotation": 90, "texture": "#3"},
+				"down": {"uv": [0, 0, 6, 3], "rotation": 90, "texture": "#3"}
+			}
+		},
+		{
+			"name": "filter_plate",
+			"from": [4.75, 7, 4.75],
+			"to": [11.25, 8, 11.25],
+			"faces": {
+				"north": {"uv": [0, 11, 6.5, 12], "texture": "#4"},
+				"east": {"uv": [0, 4, 6.5, 5], "texture": "#4"},
+				"south": {"uv": [2.75, 13, 9.25, 14], "texture": "#4"},
+				"west": {"uv": [1.75, 1, 8.25, 2], "texture": "#4"},
+				"up": {"uv": [10.5, 0, 16, 5.5], "texture": "#4"},
+				"down": {"uv": [11, 11, 16, 16], "texture": "#4"}
+			}
+		}
+	]
+}

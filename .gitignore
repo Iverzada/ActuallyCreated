@@ -40,3 +40,6 @@ Thumbs.db
 /assets/
 /data/
 /META-INF/
+
+# IDE/build output
+bin/

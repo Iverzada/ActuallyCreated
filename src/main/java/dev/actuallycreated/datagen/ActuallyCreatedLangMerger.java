@@ -30,7 +30,7 @@ public class ActuallyCreatedLangMerger {
     private static final Gson GSON = new Gson();
 
     /** Partial file names under {@code assets/actuallycreated/lang/default/}, without ".json". */
-    private static final String[] PARTIALS = {"interface", "tooltips"};
+    private static final String[] PARTIALS = {"interface"};
 
     /**
      * Reads every partial and forwards its entries to the consumer (Registrate's lang

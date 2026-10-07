@@ -4,7 +4,7 @@ import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import dev.actuallycreated.registry.ACBlocks;
 
 public class AllCreativeModeTabs {
 
@@ -12,7 +12,7 @@ public class AllCreativeModeTabs {
             ActuallyCreated.REGISTRATE.defaultCreativeTab("main_tab", builder ->
                     builder
                             .title(Component.translatable(Lang.CREATIVE_TAB))
-                            .icon(() -> new ItemStack(Items.HONEYCOMB))  // Replace with your own icon
+                            .icon(() -> new ItemStack(ACBlocks.COFFEE_PRESS.get()))
                             .build()
             ).register();
 

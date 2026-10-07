@@ -1,28 +1,28 @@
 {
   "variants": {
     "facing=down": {
-      "model": "actuallycreated:block/kinetic_atomic_reconstructor",
+      "model": "actuallycreated:block/kinetic_atomic_reconstructor/kinetic_atomic_reconstructor",
       "x": 180
     },
     "facing=east": {
-      "model": "actuallycreated:block/kinetic_atomic_reconstructor",
+      "model": "actuallycreated:block/kinetic_atomic_reconstructor/kinetic_atomic_reconstructor",
       "x": 90,
       "y": 90
     },
     "facing=north": {
-      "model": "actuallycreated:block/kinetic_atomic_reconstructor",
+      "model": "actuallycreated:block/kinetic_atomic_reconstructor/kinetic_atomic_reconstructor",
       "x": 90
     },
     "facing=south": {
-      "model": "actuallycreated:block/kinetic_atomic_reconstructor",
+      "model": "actuallycreated:block/kinetic_atomic_reconstructor/kinetic_atomic_reconstructor",
       "x": 90,
       "y": 180
     },
     "facing=up": {
-      "model": "actuallycreated:block/kinetic_atomic_reconstructor"
+      "model": "actuallycreated:block/kinetic_atomic_reconstructor/kinetic_atomic_reconstructor"
     },
     "facing=west": {
-      "model": "actuallycreated:block/kinetic_atomic_reconstructor",
+      "model": "actuallycreated:block/kinetic_atomic_reconstructor/kinetic_atomic_reconstructor",
       "x": 90,
       "y": 270
     }

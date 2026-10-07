@@ -2,23 +2,12 @@
 	"itemGroup.actuallycreated": "Beispiel Create-Erweiterung",
 	"itemGroup.actuallycreated.main_tab": "Hauptreiter",
 
-	"block.actuallycreated.actuallycreated_kinetic_block": "Beispiel-Kinetikblock",
-	"block.actuallycreated.actuallycreated_generator_block": "Beispiel-Generatorblock",
-
-	"item.actuallycreated.actuallycreated_item": "Beispielgegenstand",
-	"item.actuallycreated.actuallycreated_result": "Beispielergebnis",
-	"item.actuallycreated.incomplete_example": "Unvollständiges Beispiel",
-
 	"gui.actuallycreated.actuallycreated_generator.generating": "Erzeugt Rotation",
 	"gui.actuallycreated.actuallycreated_kinetic.consuming": "Verbraucht Belastung",
 	"gui.actuallycreated.rpm": "%s UPM",
 	"gui.actuallycreated.su": "%s SU",
 
 	"display_source.actuallycreated.actuallycreated_source": "Kinetische Geschwindigkeit",
-
-	"item.actuallycreated.actuallycreated_item.tooltip.summary": "Ein Vorführgegenstand für die _Beispiel-Erweiterung_.",
-	"item.actuallycreated.actuallycreated_item.tooltip.condition1": "Wenn gehalten",
-	"item.actuallycreated.actuallycreated_item.tooltip.behaviour1": "Zeigt diese Beschreibung – ermöglicht durch Creates _ItemDescription_-Tooltip-System.",
 
 	"actuallycreated.ponder.actuallycreated_ponder.header": "Willkommen bei der Beispiel-Erweiterung",
 	"actuallycreated.ponder.actuallycreated_ponder.text_1": "Jeder Block hier wird aus actuallycreated_ponder.nbt geladen",

@@ -1,0 +1,9 @@
+{
+  "apply_tint": true,
+  "fluid": "actuallycreated:black_coffee",
+  "loader": "neoforge:fluid_container",
+  "textures": {
+    "base": "minecraft:item/bucket",
+    "fluid": "neoforge:item/mask/bucket_fluid"
+  }
+}

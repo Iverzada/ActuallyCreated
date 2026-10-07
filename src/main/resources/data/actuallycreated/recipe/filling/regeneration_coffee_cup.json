@@ -1,0 +1,13 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    { "item": "actuallyadditions:empty_cup" },
+    { "type": "neoforge:single", "amount": 250, "fluid": "actuallycreated:regeneration_coffee" }
+  ],
+  "results": [{
+    "id": "actuallyadditions:coffee_cup",
+    "components": {
+      "minecraft:custom_data": { "Counter": 1, "1": { "ID": "minecraft:regeneration", "Duration": 5, "Amplifier": 0 } }
+    }
+  }]
+}

@@ -23,6 +23,7 @@ import dev.actuallycreated.ActuallyCreated;
 import dev.actuallycreated.AllCreativeModeTabs;
 import dev.actuallycreated.content.reconstructor.KineticAtomicReconstructorBlock;
 import dev.actuallycreated.content.reconstructor.KineticAtomicReconstructorBlockEntity;
+import dev.actuallycreated.compat.CreatedModeAccess;
 import dev.actuallycreated.registry.ACBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
@@ -39,11 +40,6 @@ public class ReconstructorGameTests {
         @GameTest(template = "reconstructor_test")
         public static void recipeAndShaftRegistration(GameTestHelper helper) {
                 var level = helper.getLevel();
-                if (level.getRecipeManager().byKey(ActuallyCreated.asResource("sequenced_assembly/laser_press_test"))
-                                .isEmpty()) {
-                        helper.fail("Laser / press / press / laser demonstration recipe is missing");
-                        return;
-                }
                 if (NativeReconstructionAdapter.find(level, new ItemStack(Items.IRON_INGOT)).isEmpty()) {
                         helper.fail("Native Actually Additions laser recipes were not found");
                         return;
@@ -132,6 +128,34 @@ public class ReconstructorGameTests {
         }
 
         @GameTest(template = "reconstructor_test")
+        public static void kineticReconstructorDirectlyTargetsTransports(GameTestHelper helper) {
+                var level = helper.getLevel();
+                var input = new ItemStack(Items.IRON_INGOT);
+                var expected = NativeReconstructionAdapter.find(level, input).orElseThrow()
+                                .value().getResultItem(level.registryAccess());
+                BlockPos machinePos = new BlockPos(1, 1, 1);
+                BlockPos targetPos = new BlockPos(3, 1, 1);
+
+                for (boolean onBelt : new boolean[] { false, true }) {
+                        helper.setBlock(machinePos, Blocks.AIR);
+                        helper.setBlock(targetPos, onBelt
+                                        ? AllBlocks.BELT.get().defaultBlockState()
+                                                        .setValue(BeltBlock.SLOPE, BeltSlope.HORIZONTAL)
+                                        : AllBlocks.DEPOT.get().defaultBlockState());
+                        putTransported(helper, targetPos, input, onBelt);
+                        var machine = machine(helper, machinePos);
+
+                        // No pulse or manual invocation: the server tick must notice the item
+                        // on the directly targeted transport and fire by itself.
+                        machine.tick();
+                        helper.assertTrue(ItemStack.isSameItemSameComponents(
+                                        getTransported(helper, targetPos, onBelt), expected),
+                                        "Direct transport target was not reconstructed automatically");
+                }
+                helper.succeed();
+        }
+
+        @GameTest(template = "reconstructor_test")
         public static void assemblyOnDepotAndBelt(GameTestHelper helper) {
                 var level = helper.getLevel();
                 var manager = level.getRecipeManager();
@@ -181,49 +205,6 @@ public class ReconstructorGameTests {
                                         "Belt did not advance the assembly exactly once");
                 } finally {
                         manager.replaceRecipes(original);
-                }
-                helper.succeed();
-        }
-
-        @GameTest(template = "reconstructor_test")
-        public static void shippedFourStepAssembly(GameTestHelper helper) {
-                var level = helper.getLevel();
-                BlockPos targetPos = new BlockPos(3, 1, 1);
-                helper.setBlock(new BlockPos(2, 2, 1), Blocks.AIR);
-                helper.setBlock(targetPos.above(), Blocks.AIR);
-                for (boolean onBelt : new boolean[] { false, true }) {
-                        helper.setBlock(new BlockPos(1, 2, 1), Blocks.AIR);
-                        helper.setBlock(targetPos, onBelt ? AllBlocks.BELT.get().defaultBlockState()
-                                        .setValue(BeltBlock.SLOPE, BeltSlope.HORIZONTAL)
-                                        : AllBlocks.DEPOT.get().defaultBlockState());
-                        var machine = machine(helper, new BlockPos(1, 2, 1));
-                        // Ready but empty: the machine must detect the later insertion automatically.
-                        machine.tick();
-                        putTransported(helper, targetPos, new ItemStack(Items.AMETHYST_SHARD), onBelt);
-                        machine.tick();
-                        ItemStack current = getTransported(helper, targetPos, onBelt);
-                        helper.assertTrue(current.has(AllDataComponents.SEQUENCED_ASSEMBLY)
-                                        && current.get(AllDataComponents.SEQUENCED_ASSEMBLY).step() == 1,
-                                        "First laser did not start assembly (belt=" + onBelt + ")");
-                        for (int step = 1; step <= 2; step++) {
-                                for (int tick = 0; tick < 10; tick++)
-                                        machine.tick();
-                                helper.assertTrue(ItemStack.matches(current, getTransported(helper, targetPos, onBelt)),
-                                                "Laser skipped a pressing operation");
-                                var press = SequencedAssemblyRecipe.getRecipe(level, current,
-                                                com.simibubi.create.AllRecipeTypes.PRESSING.getType(),
-                                                PressingRecipe.class).orElseThrow();
-                                current = press.value().rollResults(level.random).getFirst();
-                                helper.assertTrue(current.get(AllDataComponents.SEQUENCED_ASSEMBLY).step() == step + 1,
-                                                "Press did not advance exactly one step");
-                                putTransported(helper, targetPos, current, onBelt);
-                        }
-                        // No neighbour notification: changing the transported stack is enough.
-                        machine.tick();
-                        ItemStack result = getTransported(helper, targetPos, onBelt);
-                        helper.assertTrue(result.is(dev.actuallycreated.AllItems.EXAMPLE_RESULT.get())
-                                        && result.getCount() == 1 && !result.has(AllDataComponents.SEQUENCED_ASSEMBLY),
-                                        "Final laser did not finish the four-step assembly");
                 }
                 helper.succeed();
         }
@@ -283,28 +264,6 @@ public class ReconstructorGameTests {
                         }
                         helper.assertTrue(remaining == 4 && converted == 2 * expected.getCount(),
                                         "Native transport conversion lost items");
-                        putTransported(helper, targetPos, new ItemStack(Items.AMETHYST_SHARD), onBelt);
-                        machine.storage.setEnergyStored(20000);
-                        api.invokeReconstructor(machine);
-                        ItemStack current = getTransported(helper, targetPos, onBelt);
-                        helper.assertTrue(current.has(AllDataComponents.SEQUENCED_ASSEMBLY)
-                                        && current.get(AllDataComponents.SEQUENCED_ASSEMBLY).step() == 1,
-                                        "Native laser did not start assembly");
-                        api.invokeReconstructor(machine);
-                        helper.assertTrue(ItemStack.matches(current, getTransported(helper, targetPos, onBelt)),
-                                        "Native laser skipped press");
-                        for (int i = 0; i < 2; i++) {
-                                current = SequencedAssemblyRecipe.getRecipe(level, current,
-                                                com.simibubi.create.AllRecipeTypes.PRESSING.getType(),
-                                                PressingRecipe.class).orElseThrow()
-                                                .value().rollResults(level.random).getFirst();
-                        }
-                        putTransported(helper, targetPos, current, onBelt);
-                        api.invokeReconstructor(machine);
-                        helper.assertTrue(
-                                        getTransported(helper, targetPos, onBelt)
-                                                        .is(dev.actuallycreated.AllItems.EXAMPLE_RESULT.get()),
-                                        "Native laser did not finish assembly");
                 }
                 helper.succeed();
         }
@@ -362,35 +321,35 @@ public class ReconstructorGameTests {
                                                                 Direction.EAST));
                                 var machine = (de.ellpeck.actuallyadditions.mod.tile.TileEntityAtomicReconstructor) level
                                                 .getBlockEntity(helper.absolutePos(pos));
+                                var createdMode = (CreatedModeAccess) machine;
+                                createdMode.actuallycreated$setCreatedMode(true);
+                                var syncedMode = machine.getUpdateTag(level.registryAccess());
+                                createdMode.actuallycreated$setCreatedMode(false);
+                                machine.handleUpdateTag(syncedMode, level.registryAccess());
+                                helper.assertTrue(createdMode.actuallycreated$isCreatedMode(),
+                                                "Created Mode did not survive block entity NBT sync");
                                 machine.storage.setEnergyStored(20000);
-                                // Run the real block ticker, initially with empty transports.
-                                de.ellpeck.actuallyadditions.mod.tile.TileEntityAtomicReconstructor.serverTick(
-                                                level, machine.getBlockPos(), machine.getBlockState(), machine);
+                                // Pass the native 100-tick timer with empty transports.
+                                for (int tick = 0; tick < 102; tick++)
+                                        de.ellpeck.actuallyadditions.mod.tile.TileEntityAtomicReconstructor.serverTick(
+                                                        level, machine.getBlockPos(), machine.getBlockState(), machine);
+                                helper.assertTrue(machine.getEnergy() == 20000,
+                                                "Created Mode fired the native periodic shot without a recipe");
                                 putTransported(helper, target, new ItemStack(Items.IRON_INGOT), onBelt);
                                 machine.isPulseMode = true;
                                 de.ellpeck.actuallyadditions.mod.tile.TileEntityAtomicReconstructor.serverTick(
                                                 level, machine.getBlockPos(), machine.getBlockState(), machine);
-                                helper.assertTrue(getTransported(helper, target, onBelt).is(Items.IRON_INGOT),
-                                                "Automatic shot ignored pulse mode");
+                                helper.assertTrue(ItemStack.isSameItemSameComponents(
+                                                getTransported(helper, target, onBelt), expected),
+                                                "Created Mode did not fire for a valid transport recipe");
+                                putTransported(helper, target, new ItemStack(Items.IRON_INGOT), onBelt);
                                 machine.isPulseMode = false;
                                 machine.isRedstonePowered = true;
                                 de.ellpeck.actuallyadditions.mod.tile.TileEntityAtomicReconstructor.serverTick(
                                                 level, machine.getBlockPos(), machine.getBlockState(), machine);
                                 helper.assertTrue(getTransported(helper, target, onBelt).is(Items.IRON_INGOT),
-                                                "Automatic shot ignored redstone disable");
+                                                "Created Mode ignored its shot cooldown");
                                 machine.isRedstonePowered = false;
-                                de.ellpeck.actuallyadditions.mod.tile.TileEntityAtomicReconstructor.serverTick(
-                                                level, machine.getBlockPos(), machine.getBlockState(), machine);
-                                helper.assertTrue(
-                                                ItemStack.isSameItemSameComponents(
-                                                                getTransported(helper, target, onBelt), expected),
-                                                "Native automatic shot failed behind empty transport: belt=" + onBelt
-                                                                + ", height=" + machineY);
-                                putTransported(helper, target, new ItemStack(Items.IRON_INGOT), onBelt);
-                                de.ellpeck.actuallyadditions.mod.tile.TileEntityAtomicReconstructor.serverTick(
-                                                level, machine.getBlockPos(), machine.getBlockState(), machine);
-                                helper.assertTrue(getTransported(helper, target, onBelt).is(Items.IRON_INGOT),
-                                                "Automatic cooldown was ignored");
                                 // Explicit shots use the same path and still reach the item past an empty
                                 // segment.
                                 api.invokeReconstructor(machine);

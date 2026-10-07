@@ -6,10 +6,12 @@
   "refmap": "actuallycreated.refmap.json",
   "mixins": [
     "ConversionLensMixin",
-    "AtomicReconstructorTickMixin"
+    "AtomicReconstructorTickMixin",
+    "AtomicReconstructorBlockMixin"
   ],
   "client": [
-    "PonderSceneAccessor"
+    "PonderSceneAccessor",
+    "ClientEventsModeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

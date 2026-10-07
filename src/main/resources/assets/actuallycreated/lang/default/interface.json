@@ -1,4 +1,6 @@
 {
+  "gui.actuallycreated.coffee_press.items": "Coffee Press Items",
+  "jei.actuallycreated.coffee_making": "Coffee Press",
 	"itemGroup.actuallycreated": "Actually Created",
 
 	"gui.actuallycreated.actuallycreated_generator.generating": "Generating rotation",
@@ -7,5 +9,9 @@
 	"gui.actuallycreated.su": "%s SU",
 
 	"display_source.actuallycreated.actuallycreated_source": "Kinetic Speed",
-	"recipe.actuallycreated.assembly.reconstructing": "Reconstructing"
+	"recipe.actuallycreated.assembly.reconstructing": "Reconstructing",
+	"message.actuallycreated.reconstructor.mode.automatic": "Atomic Reconstructor: Automatic Mode",
+	"message.actuallycreated.reconstructor.mode.pulse": "Atomic Reconstructor: Pulse Mode",
+	"message.actuallycreated.reconstructor.mode.created": "Atomic Reconstructor: Created Mode",
+	"info.actuallycreated.redstoneMode.created": "Created"
 }

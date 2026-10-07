@@ -31,11 +31,18 @@ import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.Nullable;
 import de.ellpeck.actuallyadditions.mod.network.PacketHelperServer;
 import de.ellpeck.actuallyadditions.mod.AASounds;
+import de.ellpeck.actuallyadditions.api.ActuallyAdditionsAPI;
+import de.ellpeck.actuallyadditions.api.internal.IAtomicReconstructor;
+import de.ellpeck.actuallyadditions.api.lens.ILensItem;
+import de.ellpeck.actuallyadditions.api.lens.Lens;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.phys.Vec3;
 
-public class KineticAtomicReconstructorBlockEntity extends KineticBlockEntity implements IAirCurrentSource {
+public class KineticAtomicReconstructorBlockEntity extends KineticBlockEntity implements IAirCurrentSource, IAtomicReconstructor {
     /**
      * Stress impact in SU per RPM, matching the addon's Create stress registration.
      */
@@ -43,9 +50,24 @@ public class KineticAtomicReconstructorBlockEntity extends KineticBlockEntity im
     public static final int MAX_OPERATIONS_PER_SHOT = 4;
     private static final int COOLDOWN_SCALE = 2560;
     private int cooldown;
+    private int beamTtl;
+    private final ItemStackHandler lensInventory = new ItemStackHandler(1) {
+        @Override public boolean isItemValid(int slot, ItemStack stack) { return stack.getItem() instanceof ILensItem; }
+        @Override public int getSlotLimit(int slot) { return 1; }
+        @Override protected void onContentsChanged(int slot) {
+            setChanged();
+            if (level != null && !level.isClientSide) sendData();
+        }
+    };
 
     public KineticAtomicReconstructorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+    }
+
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK,
+                dev.actuallycreated.registry.ACBlockEntities.KINETIC_ATOMIC_RECONSTRUCTOR.get(),
+                (be, side) -> be.lensInventory);
     }
 
     public static int cooldownForRpm(float rpm) {
@@ -62,18 +84,36 @@ public class KineticAtomicReconstructorBlockEntity extends KineticBlockEntity im
             return;
         if (cooldown > 0)
             cooldown--;
+        if (beamTtl > 0)
+            beamTtl--;
         if (getSpeed() == 0 || cooldown > 0)
             return;
+
+        if (getLens() != ActuallyAdditionsAPI.lensDefaultConversion) {
+            if (ActuallyAdditionsAPI.methodHandler.invokeReconstructor(this)) {
+                cooldown = cooldownForRpm(getSpeed());
+                setChanged();
+            }
+            return;
+        }
 
         // Scan live handlers every ready tick: insertion, belt movement and assembly
         // updates all trigger a shot without requiring a redstone/block update.
         Direction front = getBlockState().getValue(KineticAtomicReconstructorBlock.FACING);
-        float reach = AirCurrent.getFlowLimit(level, worldPosition, getMaxDistance(), front);
-        for (int distance = 1; distance <= Math.ceil(reach); distance++) {
+        int reach = (int) Math.ceil(getMaxDistance());
+        for (int distance = 1; distance <= reach; distance++) {
             BlockPos target = worldPosition.relative(front, distance);
             if (!level.isLoaded(target))
                 break;
-            for (int offset = 0; offset <= 1; offset++) {
+
+            // Belts and depots are valid beam targets rather than obstructions. Check
+            // the beam block itself first (direct hit), then the transport one block
+            // below a horizontal beam (the usual item height).
+            boolean directTransport = hasTransportHandler(target);
+            if (!level.getBlockState(target).isAir() && !directTransport)
+                break;
+            int transportOffsets = front.getAxis().isHorizontal() ? 1 : 0;
+            for (int offset = 0; offset <= transportOffsets; offset++) {
                 if (processTransported(target.below(offset), reach)) {
                     cooldown = cooldownForRpm(getSpeed());
                     setChanged();
@@ -93,6 +133,10 @@ public class KineticAtomicReconstructorBlockEntity extends KineticBlockEntity im
                 }
             }
         }
+    }
+
+    private boolean hasTransportHandler(BlockPos pos) {
+        return BlockEntityBehaviour.get(level, pos, TransportedItemStackHandlerBehaviour.TYPE) != null;
     }
 
     /**
@@ -207,13 +251,32 @@ public class KineticAtomicReconstructorBlockEntity extends KineticBlockEntity im
     protected void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
         super.write(tag, registries, clientPacket);
         tag.putInt("ReconstructingCooldown", cooldown);
+        tag.put("Lens", lensInventory.serializeNBT(registries));
     }
 
     @Override
     protected void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
         super.read(tag, registries, clientPacket);
         cooldown = Math.max(0, tag.getInt("ReconstructingCooldown"));
+        lensInventory.deserializeNBT(registries, tag.getCompound("Lens"));
     }
+
+    public ItemStackHandler getLensInventory() { return lensInventory; }
+    @Override public Lens getLens() {
+        ItemStack stack = lensInventory.getStackInSlot(0);
+        return stack.getItem() instanceof ILensItem lensItem ? lensItem.getLens() : ActuallyAdditionsAPI.lensDefaultConversion;
+    }
+    @Override public Direction getOrientation() { return getAirflowOriginSide(); }
+    @Override public void resetBeam(int ttl) { resetBeam(ttl, getLens().getColor()); }
+    @Override public void resetBeam(int ttl, int color) { beamTtl = ttl; }
+    @Override public int getTTL() { return beamTtl; }
+    @Override public BlockPos getPosition() { return worldPosition; }
+    @Override public int getX() { return worldPosition.getX(); }
+    @Override public int getY() { return worldPosition.getY(); }
+    @Override public int getZ() { return worldPosition.getZ(); }
+    @Override public Level getWorldObject() { return level; }
+    @Override public void extractEnergy(int amount) { }
+    @Override public int getEnergy() { return Integer.MAX_VALUE; }
 
     @Override
     @Nullable

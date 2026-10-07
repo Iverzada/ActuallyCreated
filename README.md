@@ -26,10 +26,16 @@ cooldown. Unprocessed items are preserved; depot outputs use Create's output buf
 
 The original `actuallyadditions:atomic_reconstructor` conversion lens also processes
 Create depots and belts in its beam path, including the laser assembly operation.
-Its normal automatic timer, pulse/redstone control, range and 1,000 FE firing cost
-are preserved. Native conversions additionally consume the recipe's FE cost per
-item; assembly laser steps consume 1,000 FE. Insufficient energy leaves the remaining
-input on the transport. Other lens types keep their original behaviour.
+Use the Actually Additions redstone configuration item to cycle Automatic → Pulse →
+Created → Automatic. In Created Mode, the reconstructor fires only when a depot or
+belt holds an item with a currently valid native `actuallyadditions:laser` recipe
+or `actuallycreated:reconstructing` assembly step. Recipes loaded through datapacks
+or KubeJS are discovered through the recipe manager. It checks every tick and can
+fire once per tick while a valid target remains. Redstone does not trigger or disable Created Mode.
+The native range and 1,000 FE firing cost apply. Native conversions additionally
+consume the recipe's FE cost per item; assembly laser steps consume 1,000 FE.
+Insufficient energy leaves the remaining input on the transport. Other lens types
+keep their original behaviour.
 
 The kinetic beam stays on the facing axis and accounts for Actually Additions'
 particle renderer centering offset.
