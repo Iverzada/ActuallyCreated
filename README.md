@@ -42,10 +42,6 @@ particle renderer centering offset.
 
 ## Sequenced assembly
 
-Test recipe: one `minecraft:amethyst_shard` ? laser ? press ? press ? laser ?
-one `actuallycreated:actuallycreated_result` (100% chance, one loop). The intermediate
-item is `actuallycreated:incomplete_example`. Search the result in JEI to view it.
-
 Datapacks can embed an `actuallycreated:reconstructing` operation in a
 `create:sequenced_assembly` sequence using Create's standard processing step format:
 
