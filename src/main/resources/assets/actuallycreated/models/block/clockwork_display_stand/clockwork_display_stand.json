@@ -1,0 +1,229 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "arm": "create:block/mechanical_arm",
+    "brass": "create:block/brass_block",
+    "particle": "create:block/brass_casing",
+    "pedestal_north": "actuallycreated:block/clockwork_display_stand/pedestal_north",
+    "pedestal_east": "actuallycreated:block/clockwork_display_stand/pedestal_east",
+    "pedestal_south": "actuallycreated:block/clockwork_display_stand/pedestal_south",
+    "pedestal_west": "actuallycreated:block/clockwork_display_stand/pedestal_west",
+    "pedestal_up": "actuallycreated:block/clockwork_display_stand/pedestal_up",
+    "pedestal_down": "actuallycreated:block/clockwork_display_stand/pedestal_down",
+    "plate_north": "actuallycreated:block/clockwork_display_stand/plate_north",
+    "plate_east": "actuallycreated:block/clockwork_display_stand/plate_east",
+    "plate_south": "actuallycreated:block/clockwork_display_stand/plate_south",
+    "plate_west": "actuallycreated:block/clockwork_display_stand/plate_west",
+    "plate_up": "actuallycreated:block/clockwork_display_stand/plate_up",
+    "plate_down": "actuallycreated:block/clockwork_display_stand/plate_down"
+  },
+  "elements": [
+    {
+      "name": "Mechanical Arm base",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        6,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            8,
+            8,
+            11
+          ],
+          "texture": "#arm"
+        },
+        "east": {
+          "uv": [
+            0,
+            8,
+            8,
+            11
+          ],
+          "texture": "#arm"
+        },
+        "south": {
+          "uv": [
+            0,
+            8,
+            8,
+            11
+          ],
+          "texture": "#arm"
+        },
+        "west": {
+          "uv": [
+            0,
+            8,
+            8,
+            11
+          ],
+          "texture": "#arm"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#brass"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#particle"
+        }
+      }
+    },
+    {
+      "name": "Item pedestal",
+      "from": [
+        5,
+        10,
+        5
+      ],
+      "to": [
+        11,
+        12,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pedestal_north"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pedestal_east"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pedestal_south"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pedestal_west"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pedestal_up"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pedestal_down"
+        }
+      }
+    },
+    {
+      "name": "Item plate",
+      "from": [
+        3,
+        12,
+        3
+      ],
+      "to": [
+        13,
+        13,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#plate_north"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#plate_east"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#plate_south"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#plate_west"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#plate_up"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#plate_down"
+        }
+      }
+    }
+  ]
+}

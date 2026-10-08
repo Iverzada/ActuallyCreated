@@ -1,0 +1,652 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "arm": "create:block/mechanical_arm",
+    "brass": "create:block/brass_block",
+    "particle": "create:block/brass_casing",
+    "pedestal_north": "actuallycreated:block/clockwork_display_stand/pedestal_north",
+    "pedestal_east": "actuallycreated:block/clockwork_display_stand/pedestal_east",
+    "pedestal_south": "actuallycreated:block/clockwork_display_stand/pedestal_south",
+    "pedestal_west": "actuallycreated:block/clockwork_display_stand/pedestal_west",
+    "pedestal_up": "actuallycreated:block/clockwork_display_stand/pedestal_up",
+    "pedestal_down": "actuallycreated:block/clockwork_display_stand/pedestal_down",
+    "flywheel": "create:block/flywheel",
+    "plate_north": "actuallycreated:block/clockwork_display_stand/plate_north",
+    "plate_east": "actuallycreated:block/clockwork_display_stand/plate_east",
+    "plate_south": "actuallycreated:block/clockwork_display_stand/plate_south",
+    "plate_west": "actuallycreated:block/clockwork_display_stand/plate_west",
+    "plate_up": "actuallycreated:block/clockwork_display_stand/plate_up",
+    "plate_down": "actuallycreated:block/clockwork_display_stand/plate_down"
+  },
+  "elements": [
+    {
+      "name": "Mechanical Arm base",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        6,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            8,
+            8,
+            11
+          ],
+          "texture": "#arm"
+        },
+        "east": {
+          "uv": [
+            0,
+            8,
+            8,
+            11
+          ],
+          "texture": "#arm"
+        },
+        "south": {
+          "uv": [
+            0,
+            8,
+            8,
+            11
+          ],
+          "texture": "#arm"
+        },
+        "west": {
+          "uv": [
+            0,
+            8,
+            8,
+            11
+          ],
+          "texture": "#arm"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#brass"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#particle"
+        }
+      }
+    },
+    {
+      "name": "Gear5",
+      "from": [
+        6.5,
+        6,
+        -1
+      ],
+      "to": [
+        9.5,
+        10,
+        17
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          8,
+          8,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            13,
+            5.5,
+            15,
+            7
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "east": {
+          "uv": [
+            13,
+            7,
+            15,
+            16
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "south": {
+          "uv": [
+            13,
+            5.5,
+            15,
+            7
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "west": {
+          "uv": [
+            13,
+            7,
+            15,
+            16
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "up": {
+          "uv": [
+            11.5,
+            7,
+            13,
+            16
+          ],
+          "texture": "#flywheel"
+        },
+        "down": {
+          "uv": [
+            11.5,
+            7,
+            13,
+            16
+          ],
+          "texture": "#flywheel"
+        }
+      }
+    },
+    {
+      "name": "Gear6",
+      "from": [
+        6.5,
+        6,
+        -1
+      ],
+      "to": [
+        9.5,
+        10,
+        17
+      ],
+      "neoforge_data": {
+        "calculate_normals": true
+      },
+      "rotation": {
+        "angle": 45,
+        "axis": "y",
+        "origin": [
+          8,
+          8,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            13,
+            5.5,
+            15,
+            7
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "east": {
+          "uv": [
+            13,
+            7,
+            15,
+            16
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "south": {
+          "uv": [
+            13,
+            5.5,
+            15,
+            7
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "west": {
+          "uv": [
+            13,
+            7,
+            15,
+            16
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "up": {
+          "uv": [
+            11.5,
+            7,
+            13,
+            16
+          ],
+          "texture": "#flywheel"
+        },
+        "down": {
+          "uv": [
+            11.5,
+            7,
+            13,
+            16
+          ],
+          "texture": "#flywheel"
+        }
+      }
+    },
+    {
+      "name": "Gear7",
+      "from": [
+        -1,
+        6,
+        6.5
+      ],
+      "to": [
+        17,
+        10,
+        9.5
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          8,
+          8,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            13,
+            7,
+            15,
+            16
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "east": {
+          "uv": [
+            13,
+            5.5,
+            15,
+            7
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "south": {
+          "uv": [
+            13,
+            7,
+            15,
+            16
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "west": {
+          "uv": [
+            13,
+            5.5,
+            15,
+            7
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "up": {
+          "uv": [
+            11.5,
+            7,
+            13,
+            16
+          ],
+          "rotation": 270,
+          "texture": "#flywheel"
+        },
+        "down": {
+          "uv": [
+            11.5,
+            7,
+            13,
+            16
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        }
+      }
+    },
+    {
+      "name": "Gear8",
+      "from": [
+        -1,
+        6,
+        6.5
+      ],
+      "to": [
+        17,
+        10,
+        9.5
+      ],
+      "neoforge_data": {
+        "calculate_normals": true
+      },
+      "rotation": {
+        "angle": 45,
+        "axis": "y",
+        "origin": [
+          8,
+          8,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            13,
+            7,
+            15,
+            16
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "east": {
+          "uv": [
+            13,
+            5.5,
+            15,
+            7
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "south": {
+          "uv": [
+            13,
+            7,
+            15,
+            16
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "west": {
+          "uv": [
+            13,
+            5.5,
+            15,
+            7
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "up": {
+          "uv": [
+            11.5,
+            7,
+            13,
+            16
+          ],
+          "rotation": 270,
+          "texture": "#flywheel"
+        },
+        "down": {
+          "uv": [
+            11.5,
+            7,
+            13,
+            16
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        }
+      }
+    },
+    {
+      "name": "GearCaseInner",
+      "from": [
+        2,
+        6.5,
+        2
+      ],
+      "to": [
+        14,
+        9.5,
+        14
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          8,
+          6.5,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            10,
+            10,
+            11.5,
+            16
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "east": {
+          "uv": [
+            10,
+            10,
+            11.5,
+            16
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "south": {
+          "uv": [
+            10,
+            10,
+            11.5,
+            16
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "west": {
+          "uv": [
+            10,
+            10,
+            11.5,
+            16
+          ],
+          "rotation": 90,
+          "texture": "#flywheel"
+        },
+        "up": {
+          "uv": [
+            3,
+            6,
+            3.5,
+            6.5
+          ],
+          "rotation": 180,
+          "texture": "#flywheel"
+        },
+        "down": {
+          "uv": [
+            3.5,
+            5.5,
+            4,
+            6
+          ],
+          "rotation": 180,
+          "texture": "#flywheel"
+        }
+      }
+    },
+    {
+      "name": "Item pedestal",
+      "from": [
+        5,
+        10,
+        5
+      ],
+      "to": [
+        11,
+        12,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pedestal_north"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pedestal_east"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pedestal_south"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pedestal_west"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pedestal_up"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#pedestal_down"
+        }
+      }
+    },
+    {
+      "name": "Item plate",
+      "from": [
+        3,
+        12,
+        3
+      ],
+      "to": [
+        13,
+        13,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#plate_north"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#plate_east"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#plate_south"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#plate_west"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#plate_up"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#plate_down"
+        }
+      }
+    }
+  ]
+}

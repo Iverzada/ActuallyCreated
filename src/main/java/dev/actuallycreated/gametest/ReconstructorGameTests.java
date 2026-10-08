@@ -8,6 +8,7 @@ import com.simibubi.create.content.kinetics.belt.BeltBlock;
 import com.simibubi.create.content.kinetics.belt.BeltBlockEntity;
 import com.simibubi.create.content.kinetics.belt.BeltSlope;
 import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
+import com.simibubi.create.content.kinetics.belt.behaviour.TransportedItemStackHandlerBehaviour;
 import com.simibubi.create.content.logistics.depot.DepotBehaviour;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
@@ -138,19 +139,27 @@ public class ReconstructorGameTests {
 
                 for (boolean onBelt : new boolean[] { false, true }) {
                         helper.setBlock(machinePos, Blocks.AIR);
+                        helper.setBlock(new BlockPos(2, 1, 1), Blocks.AIR);
                         helper.setBlock(targetPos, onBelt
                                         ? AllBlocks.BELT.get().defaultBlockState()
                                                         .setValue(BeltBlock.SLOPE, BeltSlope.HORIZONTAL)
                                         : AllBlocks.DEPOT.get().defaultBlockState());
                         putTransported(helper, targetPos, input, onBelt);
                         var machine = machine(helper, machinePos);
+                        helper.assertTrue(level.getBlockState(helper.absolutePos(new BlockPos(2, 1, 1))).isAir(),
+                                        "Beam path is blocked by the test template");
+                        helper.assertTrue(BlockEntityBehaviour.get(level, helper.absolutePos(targetPos),
+                                        TransportedItemStackHandlerBehaviour.TYPE) != null,
+                                        "Direct target has no transport handler; onBelt=" + onBelt);
 
                         // No pulse or manual invocation: the server tick must notice the item
                         // on the directly targeted transport and fire by itself.
                         machine.tick();
+                        helper.assertTrue(machine.getSpeed() != 0,
+                                        "Direct transport test lost its simulated speed; onBelt=" + onBelt);
                         helper.assertTrue(ItemStack.isSameItemSameComponents(
                                         getTransported(helper, targetPos, onBelt), expected),
-                                        "Direct transport target was not reconstructed automatically");
+                                        "Direct transport target was not reconstructed automatically; onBelt=" + onBelt);
                 }
                 helper.succeed();
         }

@@ -5,6 +5,20 @@ import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 
 public final class ACPartialModels {
 
+    public static final PartialModel EMPOWERING_STAND_GEAR =
+            PartialModel.of(ActuallyCreated.asResource("block/mechanical_empowering_stand/gear"));
+
+    public static final PartialModel CRYSTALLINE_DYNAMO_SHAFT =
+            PartialModel.of(ActuallyCreated.asResource("block/crystalline_dynamo/shaft"));
+    public static final PartialModel CRYSTALLINE_DYNAMO_LEFT_JAW =
+            PartialModel.of(ActuallyCreated.asResource("block/crystalline_dynamo/left_jaw"));
+    public static final PartialModel CRYSTALLINE_DYNAMO_RIGHT_JAW =
+            PartialModel.of(ActuallyCreated.asResource("block/crystalline_dynamo/right_jaw"));
+    public static final PartialModel CRYSTALLINE_DYNAMO_FIRE =
+            PartialModel.of(ActuallyCreated.asResource("block/crystalline_dynamo/fire"));
+    public static final PartialModel CRYSTALLINE_DYNAMO_SUPERHEATED_FIRE =
+            PartialModel.of(ActuallyCreated.asResource("block/crystalline_dynamo/superheated_fire"));
+
     public static final PartialModel KINETIC_RECONSTRUCTOR_SHAFT =
             PartialModel.of(
                     ActuallyCreated.asResource(

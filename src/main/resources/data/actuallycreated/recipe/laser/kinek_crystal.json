@@ -1,0 +1,6 @@
+{
+  "type": "actuallyadditions:laser",
+  "energy": 80,
+  "ingredient": { "item": "create:andesite_alloy" },
+  "result": { "id": "actuallycreated:kinek_crystal" }
+}

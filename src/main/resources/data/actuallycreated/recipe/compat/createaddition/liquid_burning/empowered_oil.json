@@ -1,0 +1,12 @@
+{
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "createaddition" }
+  ],
+  "type": "createaddition:liquid_burning",
+  "burn_time": 12000,
+  "ingredients": [
+    { "type": "neoforge:single", "amount": 1000, "fluid": "actuallyadditions:empowered_oil" }
+  ],
+  "results": [],
+  "superheated": true
+}

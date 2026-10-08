@@ -1,0 +1,13 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "gear": "create:block/brass_casing",
+    "particle": "create:block/brass_casing"
+  },
+  "elements": [
+    {"from": [4, 0, 4], "to": [12, 2, 12], "faces": {
+      "north": {"texture": "#gear"}, "south": {"texture": "#gear"},
+      "east": {"texture": "#gear"}, "west": {"texture": "#gear"},
+      "up": {"texture": "#gear"}, "down": {"texture": "#gear"}}}
+  ]
+}

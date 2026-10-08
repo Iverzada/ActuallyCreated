@@ -1,0 +1,12 @@
+{
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "createaddition" }
+  ],
+  "type": "actuallyadditions:liquid_fuel",
+  "burn_time": 240,
+  "fuel": {
+    "amount": 50,
+    "id": "createaddition:seed_oil"
+  },
+  "total_energy": 4800
+}

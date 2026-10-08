@@ -1,0 +1,10 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    { "type": "neoforge:single", "amount": 250, "fluid": "actuallycreated:black_coffee" },
+    { "type": "neoforge:single", "amount": 250, "fluid": "minecraft:milk" }
+  ],
+  "results": [
+    { "amount": 500, "id": "actuallycreated:milk_coffee" }
+  ]
+}

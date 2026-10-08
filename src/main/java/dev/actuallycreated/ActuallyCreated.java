@@ -3,12 +3,17 @@ package dev.actuallycreated;
 
 import dev.actuallycreated.content.ponder.ActuallyCreatedPonderPlugin;
 import dev.actuallycreated.registry.ACBlocks;
+import dev.actuallycreated.registry.ACItems;
+import dev.actuallycreated.registry.ACArmInteractionPoints;
 import dev.actuallycreated.registry.ACBlockEntities;
 import dev.actuallycreated.registry.ACRecipeTypes;
 import dev.actuallycreated.registry.ACRecipeSerializers;
 import dev.actuallycreated.registry.ACFluids;
 import dev.actuallycreated.content.coffee.CoffeePressBlockEntity;
+import dev.actuallycreated.content.dynamo.CrystallineDynamoBlockEntity;
 import dev.actuallycreated.content.reconstructor.KineticAtomicReconstructorBlockEntity;
+import dev.actuallycreated.content.empowering.ClockworkDisplayStandBlockEntity;
+import dev.actuallycreated.content.empowering.MechanicalEmpoweringStandBlockEntity;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import dev.actuallycreated.datagen.ActuallyCreatedLangMerger;
 import com.tterrag.registrate.providers.ProviderType;
@@ -17,6 +22,9 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
+import com.simibubi.create.content.equipment.goggles.GogglesItem;
+import dev.actuallycreated.compat.GogglesCompat;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -45,7 +53,9 @@ public class ActuallyCreated {
         registerLangPartials();
         registerPonderLang();
         AllDisplaySources.register();
+        ACArmInteractionPoints.register(modBus);
         ACBlocks.register();
+        ACItems.register();
         ACFluids.register();
         ACBlockEntities.register();
         ACRecipeTypes.register();
@@ -59,6 +69,9 @@ public class ActuallyCreated {
     private void registerCapabilities(RegisterCapabilitiesEvent event) {
         CoffeePressBlockEntity.registerCapabilities(event);
         KineticAtomicReconstructorBlockEntity.registerCapabilities(event);
+        CrystallineDynamoBlockEntity.registerCapabilities(event);
+        MechanicalEmpoweringStandBlockEntity.registerCapabilities(event);
+        ClockworkDisplayStandBlockEntity.registerCapabilities(event);
     }
 
     public static ResourceLocation asResource(String path) {
@@ -67,6 +80,8 @@ public class ActuallyCreated {
 
     private void onCommonSetup(FMLCommonSetupEvent event) {
         LOGGER.info("Common setup...");
+        event.enqueueWork(() -> GogglesItem.addIsWearingPredicate(player ->
+                GogglesCompat.isActuallyAdditionsGoggles(player.getItemBySlot(EquipmentSlot.HEAD))));
     }
 
     private void onClientSetup(FMLClientSetupEvent event) {

@@ -1,5 +1,11 @@
 {
   "gui.actuallycreated.coffee_press.items": "Itens na Prensa de Café",
+  "block.actuallycreated.crystalline_dynamo": "Crystalline Dynamo",
+  "item.actuallycreated.kinek_crystal": "Cristal Kinek",
+  "item.actuallycreated.mecha_crystal": "Cristal Mecha",
+  "gui.actuallycreated.crystalline_dynamo.energy": "Energia: %s / %s FE",
+  "gui.actuallycreated.crystalline_dynamo.rate": "Gerando: %s FE/t",
+  "gui.actuallycreated.crystalline_dynamo.items": "Cristais dentro",
   "message.actuallycreated.reconstructor.mode.automatic": "Reconstrutor Atômico: Modo Automático",
   "message.actuallycreated.reconstructor.mode.pulse": "Reconstrutor Atômico: Modo de Pulso",
   "message.actuallycreated.reconstructor.mode.created": "Reconstrutor Atômico: Modo Created",

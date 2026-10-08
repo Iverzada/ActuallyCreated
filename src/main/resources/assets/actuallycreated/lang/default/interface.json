@@ -1,5 +1,8 @@
 {
   "gui.actuallycreated.coffee_press.items": "Coffee Press Items",
+  "gui.actuallycreated.crystalline_dynamo.energy": "Energy: %s / %s FE",
+  "gui.actuallycreated.crystalline_dynamo.rate": "Generating: %s FE/t",
+  "gui.actuallycreated.crystalline_dynamo.items": "Crystals inside",
   "jei.actuallycreated.coffee_making": "Coffee Press",
 	"itemGroup.actuallycreated": "Actually Created",
 

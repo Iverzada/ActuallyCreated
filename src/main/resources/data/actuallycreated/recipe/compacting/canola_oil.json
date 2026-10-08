@@ -1,0 +1,9 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    { "item": "actuallyadditions:canola" }
+  ],
+  "results": [
+    { "amount": 80, "id": "actuallyadditions:canola_oil" }
+  ]
+}

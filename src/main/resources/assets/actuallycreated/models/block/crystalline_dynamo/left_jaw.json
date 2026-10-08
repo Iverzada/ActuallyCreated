@@ -1,0 +1,215 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "textures": {
+    "steel": "actuallycreated:block/crystalline_dynamo/steel",
+    "trim": "actuallycreated:block/crystalline_dynamo/trim",
+    "dark": "actuallycreated:block/crystalline_dynamo/dark",
+    "roller": "actuallycreated:block/crystalline_dynamo/roller",
+    "crusher_front": "actuallycreated:block/crystalline_dynamo/crusher_front",
+    "fire": "actuallycreated:block/crystalline_dynamo/fire",
+    "superheated_fire": "actuallycreated:block/crystalline_dynamo/superheated_fire",
+    "side": "create:block/andesite_casing",
+    "particle": "create:block/andesite_block"
+  },
+  "elements": [
+    {
+      "name": "left_mill",
+      "from": [
+        4,
+        11,
+        4
+      ],
+      "to": [
+        6,
+        14,
+        12
+      ],
+      "faces": {
+        "north": {
+          "texture": "#roller"
+        },
+        "east": {
+          "texture": "#roller"
+        },
+        "south": {
+          "texture": "#roller"
+        },
+        "west": {
+          "texture": "#roller"
+        },
+        "up": {
+          "texture": "#roller"
+        },
+        "down": {
+          "texture": "#roller"
+        }
+      }
+    },
+    {
+      "name": "left_front_tooth",
+      "from": [
+        6,
+        11,
+        4
+      ],
+      "to": [
+        7,
+        14,
+        6
+      ],
+      "faces": {
+        "north": {
+          "texture": "#steel"
+        },
+        "east": {
+          "texture": "#steel"
+        },
+        "south": {
+          "texture": "#steel"
+        },
+        "west": {
+          "texture": "#steel"
+        },
+        "up": {
+          "texture": "#steel"
+        },
+        "down": {
+          "texture": "#steel"
+        }
+      }
+    },
+    {
+      "name": "left_rear_tooth",
+      "from": [
+        6,
+        11,
+        8
+      ],
+      "to": [
+        7,
+        14,
+        10
+      ],
+      "faces": {
+        "north": {
+          "texture": "#steel"
+        },
+        "east": {
+          "texture": "#steel"
+        },
+        "south": {
+          "texture": "#steel"
+        },
+        "west": {
+          "texture": "#steel"
+        },
+        "up": {
+          "texture": "#steel"
+        },
+        "down": {
+          "texture": "#steel"
+        }
+      }
+    },
+    {
+      "name": "left_rib_4.5",
+      "from": [
+        4,
+        14,
+        4.5
+      ],
+      "to": [
+        6,
+        14.5,
+        5.0
+      ],
+      "faces": {
+        "north": {
+          "texture": "#trim"
+        },
+        "east": {
+          "texture": "#trim"
+        },
+        "south": {
+          "texture": "#trim"
+        },
+        "west": {
+          "texture": "#trim"
+        },
+        "up": {
+          "texture": "#trim"
+        },
+        "down": {
+          "texture": "#trim"
+        }
+      }
+    },
+    {
+      "name": "left_rib_7",
+      "from": [
+        4,
+        14,
+        7
+      ],
+      "to": [
+        6,
+        14.5,
+        7.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#trim"
+        },
+        "east": {
+          "texture": "#trim"
+        },
+        "south": {
+          "texture": "#trim"
+        },
+        "west": {
+          "texture": "#trim"
+        },
+        "up": {
+          "texture": "#trim"
+        },
+        "down": {
+          "texture": "#trim"
+        }
+      }
+    },
+    {
+      "name": "left_rib_9.5",
+      "from": [
+        4,
+        14,
+        9.5
+      ],
+      "to": [
+        6,
+        14.5,
+        10.0
+      ],
+      "faces": {
+        "north": {
+          "texture": "#trim"
+        },
+        "east": {
+          "texture": "#trim"
+        },
+        "south": {
+          "texture": "#trim"
+        },
+        "west": {
+          "texture": "#trim"
+        },
+        "up": {
+          "texture": "#trim"
+        },
+        "down": {
+          "texture": "#trim"
+        }
+      }
+    }
+  ]
+}

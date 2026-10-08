@@ -118,6 +118,10 @@ public class CoffeePressBlockEntity extends KineticBlockEntity implements IHaveG
     @Override
     public void tick() {
         super.tick();
+        tickProcessing();
+    }
+
+    public void tickProcessing() {
         if (level == null)
             return;
 

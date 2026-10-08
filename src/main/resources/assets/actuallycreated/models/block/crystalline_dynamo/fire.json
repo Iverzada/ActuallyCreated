@@ -1,0 +1,51 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "textures": {
+    "steel": "actuallycreated:block/crystalline_dynamo/steel",
+    "trim": "actuallycreated:block/crystalline_dynamo/trim",
+    "dark": "actuallycreated:block/crystalline_dynamo/dark",
+    "roller": "actuallycreated:block/crystalline_dynamo/roller",
+    "crusher_front": "actuallycreated:block/crystalline_dynamo/crusher_front",
+    "fire": "actuallycreated:block/crystalline_dynamo/fire",
+    "superheated_fire": "actuallycreated:block/crystalline_dynamo/superheated_fire",
+    "side": "create:block/andesite_casing",
+    "particle": "create:block/andesite_block"
+  },
+  "elements": [
+    {
+      "name": "fire",
+      "from": [
+        4.5,
+        3.5,
+        2.6
+      ],
+      "to": [
+        11.5,
+        7.5,
+        2.6
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#fire"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#fire"
+        }
+      }
+    }
+  ],
+  "render_type": "minecraft:cutout"
+}

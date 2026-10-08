@@ -1,0 +1,215 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "textures": {
+    "steel": "actuallycreated:block/crystalline_dynamo/steel",
+    "trim": "actuallycreated:block/crystalline_dynamo/trim",
+    "dark": "actuallycreated:block/crystalline_dynamo/dark",
+    "roller": "actuallycreated:block/crystalline_dynamo/roller",
+    "crusher_front": "actuallycreated:block/crystalline_dynamo/crusher_front",
+    "fire": "actuallycreated:block/crystalline_dynamo/fire",
+    "superheated_fire": "actuallycreated:block/crystalline_dynamo/superheated_fire",
+    "side": "create:block/andesite_casing",
+    "particle": "create:block/andesite_block"
+  },
+  "elements": [
+    {
+      "name": "right_mill",
+      "from": [
+        10,
+        11,
+        4
+      ],
+      "to": [
+        12,
+        14,
+        12
+      ],
+      "faces": {
+        "north": {
+          "texture": "#roller"
+        },
+        "east": {
+          "texture": "#roller"
+        },
+        "south": {
+          "texture": "#roller"
+        },
+        "west": {
+          "texture": "#roller"
+        },
+        "up": {
+          "texture": "#roller"
+        },
+        "down": {
+          "texture": "#roller"
+        }
+      }
+    },
+    {
+      "name": "right_middle_tooth",
+      "from": [
+        9,
+        11,
+        6
+      ],
+      "to": [
+        10,
+        14,
+        8
+      ],
+      "faces": {
+        "north": {
+          "texture": "#steel"
+        },
+        "east": {
+          "texture": "#steel"
+        },
+        "south": {
+          "texture": "#steel"
+        },
+        "west": {
+          "texture": "#steel"
+        },
+        "up": {
+          "texture": "#steel"
+        },
+        "down": {
+          "texture": "#steel"
+        }
+      }
+    },
+    {
+      "name": "right_back_tooth",
+      "from": [
+        9,
+        11,
+        10
+      ],
+      "to": [
+        10,
+        14,
+        12
+      ],
+      "faces": {
+        "north": {
+          "texture": "#steel"
+        },
+        "east": {
+          "texture": "#steel"
+        },
+        "south": {
+          "texture": "#steel"
+        },
+        "west": {
+          "texture": "#steel"
+        },
+        "up": {
+          "texture": "#steel"
+        },
+        "down": {
+          "texture": "#steel"
+        }
+      }
+    },
+    {
+      "name": "right_rib_4.5",
+      "from": [
+        10,
+        14,
+        4.5
+      ],
+      "to": [
+        12,
+        14.5,
+        5.0
+      ],
+      "faces": {
+        "north": {
+          "texture": "#trim"
+        },
+        "east": {
+          "texture": "#trim"
+        },
+        "south": {
+          "texture": "#trim"
+        },
+        "west": {
+          "texture": "#trim"
+        },
+        "up": {
+          "texture": "#trim"
+        },
+        "down": {
+          "texture": "#trim"
+        }
+      }
+    },
+    {
+      "name": "right_rib_7",
+      "from": [
+        10,
+        14,
+        7
+      ],
+      "to": [
+        12,
+        14.5,
+        7.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#trim"
+        },
+        "east": {
+          "texture": "#trim"
+        },
+        "south": {
+          "texture": "#trim"
+        },
+        "west": {
+          "texture": "#trim"
+        },
+        "up": {
+          "texture": "#trim"
+        },
+        "down": {
+          "texture": "#trim"
+        }
+      }
+    },
+    {
+      "name": "right_rib_9.5",
+      "from": [
+        10,
+        14,
+        9.5
+      ],
+      "to": [
+        12,
+        14.5,
+        10.0
+      ],
+      "faces": {
+        "north": {
+          "texture": "#trim"
+        },
+        "east": {
+          "texture": "#trim"
+        },
+        "south": {
+          "texture": "#trim"
+        },
+        "west": {
+          "texture": "#trim"
+        },
+        "up": {
+          "texture": "#trim"
+        },
+        "down": {
+          "texture": "#trim"
+        }
+      }
+    }
+  ]
+}

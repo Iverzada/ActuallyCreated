@@ -1,0 +1,6 @@
+{
+  "type": "actuallyadditions:laser",
+  "energy": 100,
+  "ingredient": { "item": "create:brass_ingot" },
+  "result": { "id": "actuallycreated:mecha_crystal" }
+}

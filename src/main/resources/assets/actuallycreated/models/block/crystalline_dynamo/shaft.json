@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "axis": "create:block/axis",
+    "axis_top": "create:block/axis_top"
+  },
+  "elements": [
+    {
+      "from": [
+        6,
+        6,
+        13
+      ],
+      "to": [
+        10,
+        10,
+        17
+      ],
+      "faces": {
+        "south": {
+          "texture": "#axis_top"
+        },
+        "east": {
+          "texture": "#axis"
+        },
+        "west": {
+          "texture": "#axis"
+        },
+        "up": {
+          "texture": "#axis"
+        },
+        "down": {
+          "texture": "#axis"
+        }
+      }
+    }
+  ]
+}

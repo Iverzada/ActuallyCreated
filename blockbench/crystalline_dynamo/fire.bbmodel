@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "fire",
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "fire",
+      "type": "cube",
+      "uuid": "cc19b14b-1d74-5084-9cc4-57ad728d50b0",
+      "from": [
+        4.5,
+        3.5,
+        2.6
+      ],
+      "to": [
+        11.5,
+        7.5,
+        2.6
+      ],
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "autouv": 0,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "east": {
+          "texture": null,
+          "enabled": false
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "west": {
+          "texture": null,
+          "enabled": false
+        },
+        "up": {
+          "texture": null,
+          "enabled": false
+        },
+        "down": {
+          "texture": null,
+          "enabled": false
+        }
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "Chama",
+      "uuid": "c2e6bb3f-ab53-5e8b-9dde-c6988d4e2173",
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "color": 0
+    }
+  ],
+  "outliner": [
+    {
+      "uuid": "c2e6bb3f-ab53-5e8b-9dde-c6988d4e2173",
+      "isOpen": true,
+      "children": [
+        "cc19b14b-1d74-5084-9cc4-57ad728d50b0"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "fire.png",
+      "id": "0",
+      "uuid": "b6310296-08eb-5937-9538-ed4d22a65ad7",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAQCAYAAAB3AH1ZAAAAsUlEQVR4nGNgGAU4wEoNkf8gzEBj/Uy0toAQYMEl4arPBmHcQFgIosNvvGEkxmBi9bPAGLSyABeAqWchRjE2C0kFuPSzEFJAbDyTqh+mnoWQBXCDcQBS9aOrZ8GlQNCfF8x/v/EzXnlXhs8k6Ue3jwXGwGUgteVhDoLxWbCqxqKRXEBIP+P/ZerY49DRFULv381AE3koYMEri2wQDJBqIQH9jBghgK6B2gDNAWTXBdQCAFr1XJgG0TPYAAAAAElFTkSuQmCC",
+      "internal": true,
+      "visible": true
+    }
+  ]
+}

@@ -5,6 +5,10 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "actuallycreated.refmap.json",
   "mixins": [
+    "CreateGogglesMixin",
+    "BlazeBurnerGogglesMixin",
+    "MechanicalArmGogglesMixin",
+    "FrogportGogglesMixin",
     "ConversionLensMixin",
     "AtomicReconstructorTickMixin",
     "AtomicReconstructorBlockMixin"

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["ISI", "TMD", "TCT"],
+  "key": {
+    "I": { "item": "actuallyadditions:iron_casing" },
+    "C": { "item": "actuallyadditions:coal_generator" },
+    "S": { "item": "create:shaft" },
+    "M": { "item": "create:millstone" },
+    "T": { "item": "create:railway_casing" },
+    "D": { "item": "actuallyadditions:drill_core" }
+  },
+  "result": { "id": "actuallycreated:crystalline_dynamo", "count": 1 }
+}

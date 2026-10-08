@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "actuallycreated:block/crystalline_dynamo/crystalline_dynamo",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "actuallycreated:block/crystalline_dynamo/crystalline_dynamo"
+    },
+    "facing=south": {
+      "model": "actuallycreated:block/crystalline_dynamo/crystalline_dynamo",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "actuallycreated:block/crystalline_dynamo/crystalline_dynamo",
+      "y": 270
+    }
+  }
+}
